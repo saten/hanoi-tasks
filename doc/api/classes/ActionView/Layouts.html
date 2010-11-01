@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActionView::Layouts</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActionView::Layouts</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/actionpack-3_0_1/lib/action_view/render/layouts_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/render/layouts.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Action View <a href="Layouts.html">Layouts</a></h1>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001944">find_layout</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001944" class="method-detail">
+        <a name="M001944"></a>
+
+        <div class="method-heading">
+          <a href="#M001944" class="method-signature">
+          <span class="method-name">find_layout</span><span class="method-args">(layout)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This is the method which actually finds the layout using details in the
+lookup context object. If no layout is found, it checks if at least a
+layout with the given name exists across all details before raising the
+error.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001944-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001944-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/render/layouts.rb, line 65</span>
+65:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_layout</span>(<span class="ruby-identifier">layout</span>)
+66:       <span class="ruby-keyword kw">begin</span>
+67:         <span class="ruby-identifier">with_layout_format</span> <span class="ruby-keyword kw">do</span>
+68:           <span class="ruby-identifier">layout</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^\//</span> <span class="ruby-operator">?</span>
+69:             <span class="ruby-identifier">with_fallbacks</span> { <span class="ruby-identifier">find_template</span>(<span class="ruby-identifier">layout</span>) } <span class="ruby-operator">:</span> <span class="ruby-identifier">find_template</span>(<span class="ruby-identifier">layout</span>)
+70:         <span class="ruby-keyword kw">end</span>
+71:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">MissingTemplate</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+72:         <span class="ruby-identifier">update_details</span>(<span class="ruby-identifier">:formats</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>) <span class="ruby-keyword kw">do</span>
+73:           <span class="ruby-identifier">raise</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">template_exists?</span>(<span class="ruby-identifier">layout</span>)
+74:         <span class="ruby-keyword kw">end</span>
+75:       <span class="ruby-keyword kw">end</span>
+76:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

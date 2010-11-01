@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActionView::LookupContext::Details</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActionView::LookupContext::Details</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/actionpack-3_0_1/lib/action_view/lookup_context_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/lookup_context.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001971">_set_detail</a>&nbsp;&nbsp;
+      <a href="#M001965">formats=</a>&nbsp;&nbsp;
+      <a href="#M001967">locale</a>&nbsp;&nbsp;
+      <a href="#M001968">locale=</a>&nbsp;&nbsp;
+      <a href="#M001966">skip_default_locale!</a>&nbsp;&nbsp;
+      <a href="#M001970">update_details</a>&nbsp;&nbsp;
+      <a href="#M001969">with_layout_format</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001965" class="method-detail">
+        <a name="M001965"></a>
+
+        <div class="method-heading">
+          <a href="#M001965" class="method-signature">
+          <span class="method-name">formats=</span><span class="method-args">(values)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Overload <a href="Details.html#M001965">formats=</a> to reject
+[:&quot;*/*&quot;] values.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001965-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001965-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/lookup_context.rb, line 150</span>
+150:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">formats=</span>(<span class="ruby-identifier">values</span>)
+151:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">values</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+152:           <span class="ruby-identifier">value</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">first</span>
+153:           <span class="ruby-identifier">values</span> = <span class="ruby-keyword kw">nil</span>    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;*/*&quot;</span><span class="ruby-value str">&quot;*/*&quot;</span>
+154:           <span class="ruby-identifier">values</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">:html</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:js</span>
+155:         <span class="ruby-keyword kw">end</span>
+156:         <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">values</span>)
+157:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001967" class="method-detail">
+        <a name="M001967"></a>
+
+        <div class="method-heading">
+          <a href="#M001967" class="method-signature">
+          <span class="method-name">locale</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Overload <a href="Details.html#M001967">locale</a> to return a symbol
+instead of array.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001967-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001967-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/lookup_context.rb, line 166</span>
+166:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">locale</span>
+167:         <span class="ruby-ivar">@details</span>[<span class="ruby-identifier">:locale</span>].<span class="ruby-identifier">first</span>
+168:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001968" class="method-detail">
+        <a name="M001968"></a>
+
+        <div class="method-heading">
+          <a href="#M001968" class="method-signature">
+          <span class="method-name">locale=</span><span class="method-args">(value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Overload <a href="Details.html#M001968">locale=</a> to also set the
+I18n.locale. If the current I18n.config object responds to i18n_config, it
+means that it&#8216;s has a copy of the original <a
+href="../../I18n.html">I18n</a> configuration and it&#8216;s acting as
+proxy, which we need to skip.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001968-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001968-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/lookup_context.rb, line 173</span>
+173:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">locale=</span>(<span class="ruby-identifier">value</span>)
+174:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>
+175:           <span class="ruby-identifier">config</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:i18n_config</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">i18n_config</span> <span class="ruby-operator">:</span> <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">config</span>
+176:           <span class="ruby-identifier">config</span>.<span class="ruby-identifier">locale</span> = <span class="ruby-identifier">value</span>
+177:         <span class="ruby-keyword kw">end</span>
+178: 
+179:         <span class="ruby-keyword kw">super</span>(<span class="ruby-ivar">@skip_default_locale</span> <span class="ruby-operator">?</span> <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">locale</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">_locale_defaults</span>)
+180:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001966" class="method-detail">
+        <a name="M001966"></a>
+
+        <div class="method-heading">
+          <a href="#M001966" class="method-signature">
+          <span class="method-name">skip_default_locale!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Do not use the default <a href="Details.html#M001967">locale</a> on
+template lookup.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001966-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001966-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/lookup_context.rb, line 160</span>
+160:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">skip_default_locale!</span>
+161:         <span class="ruby-ivar">@skip_default_locale</span> = <span class="ruby-keyword kw">true</span>
+162:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">locale</span> = <span class="ruby-keyword kw">nil</span>
+163:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001970" class="method-detail">
+        <a name="M001970"></a>
+
+        <div class="method-heading">
+          <a href="#M001970" class="method-signature">
+          <span class="method-name">update_details</span><span class="method-args">(new_details) {|| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Update the details keys by merging the given hash into the current details
+hash. If a block is given, the details are modified just during the
+execution of the block and reverted to the previous value after.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001970-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001970-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/lookup_context.rb, line 202</span>
+202:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_details</span>(<span class="ruby-identifier">new_details</span>)
+203:         <span class="ruby-identifier">old_details</span> = <span class="ruby-ivar">@details</span>.<span class="ruby-identifier">dup</span>
+204: 
+205:         <span class="ruby-identifier">registered_detail_setters</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">setter</span><span class="ruby-operator">|</span>
+206:           <span class="ruby-identifier">send</span>(<span class="ruby-identifier">setter</span>, <span class="ruby-identifier">new_details</span>[<span class="ruby-identifier">key</span>]) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">new_details</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
+207:         <span class="ruby-keyword kw">end</span>
+208: 
+209:         <span class="ruby-keyword kw">begin</span>
+210:           <span class="ruby-keyword kw">yield</span>
+211:         <span class="ruby-keyword kw">ensure</span>
+212:           <span class="ruby-ivar">@details_key</span> = <span class="ruby-keyword kw">nil</span>
+213:           <span class="ruby-ivar">@details</span> = <span class="ruby-identifier">old_details</span>
+214:         <span class="ruby-keyword kw">end</span>
+215:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001969" class="method-detail">
+        <a name="M001969"></a>
+
+        <div class="method-heading">
+          <a href="#M001969" class="method-signature">
+          <span class="method-name">with_layout_format</span><span class="method-args">() {|| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A method which only uses the first format in the formats array for layout
+lookup. This method plays straight with instance variables for performance
+reasons.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001969-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001969-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/lookup_context.rb, line 184</span>
+184:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_layout_format</span>
+185:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">formats</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+186:           <span class="ruby-keyword kw">yield</span>
+187:         <span class="ruby-keyword kw">else</span>
+188:           <span class="ruby-identifier">old_formats</span> = <span class="ruby-identifier">formats</span>
+189:           <span class="ruby-identifier">_set_detail</span>(<span class="ruby-identifier">:formats</span>, <span class="ruby-identifier">formats</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>])
+190: 
+191:           <span class="ruby-keyword kw">begin</span>
+192:             <span class="ruby-keyword kw">yield</span>
+193:           <span class="ruby-keyword kw">ensure</span>
+194:             <span class="ruby-identifier">_set_detail</span>(<span class="ruby-identifier">:formats</span>, <span class="ruby-identifier">old_formats</span>)
+195:           <span class="ruby-keyword kw">end</span>
+196:         <span class="ruby-keyword kw">end</span>
+197:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M001971" class="method-detail">
+        <a name="M001971"></a>
+
+        <div class="method-heading">
+          <a href="#M001971" class="method-signature">
+          <span class="method-name">_set_detail</span><span class="method-args">(key, value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001971-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001971-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/lookup_context.rb, line 219</span>
+219:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_set_detail</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+220:         <span class="ruby-ivar">@details_key</span> = <span class="ruby-keyword kw">nil</span>
+221:         <span class="ruby-ivar">@details</span> = <span class="ruby-ivar">@details</span>.<span class="ruby-identifier">dup</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@details</span>.<span class="ruby-identifier">frozen?</span>
+222:         <span class="ruby-ivar">@details</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">freeze</span>
+223:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

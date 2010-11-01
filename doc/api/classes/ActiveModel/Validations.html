@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveModel::Validations</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveModel::Validations</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations/acceptance_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/acceptance.rb
+                </a>
+        <br />
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations/validates_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/validates.rb
+                </a>
+        <br />
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations/exclusion_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/exclusion.rb
+                </a>
+        <br />
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations/presence_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/presence.rb
+                </a>
+        <br />
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations/with_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/with.rb
+                </a>
+        <br />
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations/format_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/format.rb
+                </a>
+        <br />
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations/inclusion_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/inclusion.rb
+                </a>
+        <br />
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations/confirmation_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/confirmation.rb
+                </a>
+        <br />
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations/callbacks_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/callbacks.rb
+                </a>
+        <br />
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations/numericality_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/numericality.rb
+                </a>
+        <br />
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations/length_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/length.rb
+                </a>
+        <br />
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/validations_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2>Active Model <a href="Validations.html">Validations</a></h2>
+<p>
+Provides a full validation framework to your objects.
+</p>
+<p>
+A minimal implementation could be:
+</p>
+<pre>
+  class Person
+    include ActiveModel::Validations
+
+    attr_accessor :first_name, :last_name
+
+    validates_each :first_name, :last_name do |record, attr, value|
+      record.errors.add attr, 'starts with z.' if value.to_s[0] == ?z
+    end
+  end
+</pre>
+<p>
+Which provides you with the full standard validation stack that you know
+from Active Record:
+</p>
+<pre>
+  person = Person.new
+  person.valid?                   # =&gt; true
+  person.invalid?                 # =&gt; false
+
+  person.first_name = 'zoolander'
+  person.valid?                   # =&gt; false
+  person.invalid?                 # =&gt; true
+  person.errors                   # =&gt; #&lt;OrderedHash {:first_name=&gt;[&quot;starts with z.&quot;]}&gt;
+</pre>
+<p>
+Note that <a href="Validations.html">ActiveModel::Validations</a>
+automatically adds an <tt><a
+href="Validations.html#M001664">errors</a></tt> method to your instances
+initialized with a new <a href="Errors.html">ActiveModel::Errors</a>
+object, so there is no need for you to do this manually.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001664">errors</a>&nbsp;&nbsp;
+      <a href="#M001666">invalid?</a>&nbsp;&nbsp;
+      <a href="#M001667">run_validations!</a>&nbsp;&nbsp;
+      <a href="#M001665">valid?</a>&nbsp;&nbsp;
+      <a href="#M001663">validates_with</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="../ActiveSupport/Callbacks.html">ActiveSupport::Callbacks</a></span>
+        <span class="include-name"><a href="Validations/HelperMethods.html">HelperMethods</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="Validations/Callbacks.html" class="link">ActiveModel::Validations::Callbacks</a><br />
+Module <a href="Validations/ClassMethods.html" class="link">ActiveModel::Validations::ClassMethods</a><br />
+Module <a href="Validations/HelperMethods.html" class="link">ActiveModel::Validations::HelperMethods</a><br />
+Class <a href="Validations/AcceptanceValidator.html" class="link">ActiveModel::Validations::AcceptanceValidator</a><br />
+Class <a href="Validations/ConfirmationValidator.html" class="link">ActiveModel::Validations::ConfirmationValidator</a><br />
+Class <a href="Validations/ExclusionValidator.html" class="link">ActiveModel::Validations::ExclusionValidator</a><br />
+Class <a href="Validations/FormatValidator.html" class="link">ActiveModel::Validations::FormatValidator</a><br />
+Class <a href="Validations/InclusionValidator.html" class="link">ActiveModel::Validations::InclusionValidator</a><br />
+Class <a href="Validations/LengthValidator.html" class="link">ActiveModel::Validations::LengthValidator</a><br />
+Class <a href="Validations/NumericalityValidator.html" class="link">ActiveModel::Validations::NumericalityValidator</a><br />
+Class <a href="Validations/PresenceValidator.html" class="link">ActiveModel::Validations::PresenceValidator</a><br />
+
+    </div>
+
+
+    <div id="aliases-list">
+      <h3 class="section-bar">External Aliases</h3>
+
+      <div class="name-list">
+                        <table summary="aliases">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">send</td>
+          <td>-&gt;</td>
+          <td class="context-item-value">read_attribute_for_validation</td>
+        </tr>
+      <tr class="top-aligned-row context-row">
+        <td>&nbsp;</td>
+        <td colspan="2" class="context-item-desc">
+Hook method defining how an attribute value should be retrieved. By default
+this is assumed to be an instance named after the attribute. Override this
+method in subclasses should you need to retrieve the value for a given
+attribute differently:
+
+<pre>
+  class MyClass
+    include ActiveModel::Validations
+
+    def initialize(data = {})
+      @data = data
+    end
+
+    def read_attribute_for_validation(key)
+      @data[key]
+    end
+  end
+</pre>
+</td>
+      </tr>
+                        </table>
+      </div>
+    </div>
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001664" class="method-detail">
+        <a name="M001664"></a>
+
+        <div class="method-heading">
+          <a href="#M001664" class="method-signature">
+          <span class="method-name">errors</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Errors.html">Errors</a> object that holds all
+information about attribute error messages.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001664-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001664-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations.rb, line 170</span>
+170:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">errors</span>
+171:       <span class="ruby-ivar">@errors</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Errors</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)
+172:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001666" class="method-detail">
+        <a name="M001666"></a>
+
+        <div class="method-heading">
+          <a href="#M001666" class="method-signature">
+          <span class="method-name">invalid?</span><span class="method-args">(context = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Performs the opposite of <tt><a
+href="Validations.html#M001665">valid?</a></tt>. Returns true if <a
+href="Validations.html#M001664">errors</a> were added, false otherwise.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001666-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001666-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations.rb, line 187</span>
+187:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">invalid?</span>(<span class="ruby-identifier">context</span> = <span class="ruby-keyword kw">nil</span>)
+188:       <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">context</span>)
+189:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001665" class="method-detail">
+        <a name="M001665"></a>
+
+        <div class="method-heading">
+          <a href="#M001665" class="method-signature">
+          <span class="method-name">valid?</span><span class="method-args">(context = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Runs all the specified validations and returns true if no <a
+href="Validations.html#M001664">errors</a> were added otherwise false.
+Context can optionally be supplied to define which callbacks to test
+against (the context is defined on the validations using :on).
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001665-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001665-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations.rb, line 177</span>
+177:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">context</span> = <span class="ruby-keyword kw">nil</span>)
+178:       <span class="ruby-identifier">current_context</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">validation_context</span> = <span class="ruby-identifier">validation_context</span>, <span class="ruby-identifier">context</span>
+179:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">clear</span>
+180:       <span class="ruby-identifier">run_validations!</span>
+181:     <span class="ruby-keyword kw">ensure</span>
+182:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">validation_context</span> = <span class="ruby-identifier">current_context</span>
+183:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001663" class="method-detail">
+        <a name="M001663"></a>
+
+        <div class="method-heading">
+          <a href="#M001663" class="method-signature">
+          <span class="method-name">validates_with</span><span class="method-args">(*args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Passes the record off to the class or classes specified and allows them to
+add <a href="Validations.html#M001664">errors</a> based on more complex
+conditions.
+</p>
+<pre>
+  class Person
+    include ActiveModel::Validations
+
+    validates :instance_validations
+
+    def instance_validations
+      validates_with MyValidator
+    end
+  end
+</pre>
+<p>
+Please consult the class method documentation for more information on
+creating your own validator.
+</p>
+<p>
+You may also pass it multiple classes, like so:
+</p>
+<pre>
+  class Person
+    include ActiveModel::Validations
+
+    validates :instance_validations, :on =&gt; :create
+
+    def instance_validations
+      validates_with MyValidator, MyOtherValidator
+    end
+  end
+</pre>
+<p>
+Standard configuration options (:on, :if and :unless), which are available
+on the class version of <a
+href="Validations.html#M001663">validates_with</a>, should instead be
+placed on the <tt>validates</tt> method as these are applied and tested in
+the callback
+</p>
+<p>
+If you pass any additional configuration options, they will be passed to
+the class and available as <tt>options</tt>, please refer to the class
+version of this method for more information
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001663-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001663-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations/with.rb, line 123</span>
+123:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validates_with</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+124:       <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+125:       <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span><span class="ruby-operator">|</span>
+126:         <span class="ruby-identifier">validator</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+127:         <span class="ruby-identifier">validator</span>.<span class="ruby-identifier">validate</span>(<span class="ruby-keyword kw">self</span>)
+128:       <span class="ruby-keyword kw">end</span>
+129:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M001667" class="method-detail">
+        <a name="M001667"></a>
+
+        <div class="method-heading">
+          <a href="#M001667" class="method-signature">
+          <span class="method-name">run_validations!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001667-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001667-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/validations.rb, line 212</span>
+212:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_validations!</span>
+213:       <span class="ruby-identifier">_run_validate_callbacks</span>
+214:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>
+215:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

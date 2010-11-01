@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActiveRecord::ConnectionAdapters::Table</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActiveRecord::ConnectionAdapters::Table</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activerecord-3_0_1/lib/active_record/connection_adapters/abstract/schema_definitions_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../../Object.html">
+                Object
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Represents an SQL table in an abstract way for updating a table. Also see
+<a href="TableDefinition.html">TableDefinition</a> and <a
+href="SchemaStatements.html#M001188">SchemaStatements#create_table</a>
+</p>
+<p>
+Available transformations are:
+</p>
+<pre>
+  change_table :table do |t|
+    t.column
+    t.index
+    t.timestamps
+    t.change
+    t.change_default
+    t.rename
+    t.references
+    t.belongs_to
+    t.string
+    t.text
+    t.integer
+    t.float
+    t.decimal
+    t.datetime
+    t.timestamp
+    t.time
+    t.date
+    t.binary
+    t.boolean
+    t.remove
+    t.remove_references
+    t.remove_belongs_to
+    t.remove_index
+    t.remove_timestamps
+  end
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001279">belongs_to</a>&nbsp;&nbsp;
+      <a href="#M001272">change</a>&nbsp;&nbsp;
+      <a href="#M001273">change_default</a>&nbsp;&nbsp;
+      <a href="#M001267">column</a>&nbsp;&nbsp;
+      <a href="#M001268">column_exists?</a>&nbsp;&nbsp;
+      <a href="#M001269">index</a>&nbsp;&nbsp;
+      <a href="#M001270">index_exists?</a>&nbsp;&nbsp;
+      <a href="#M001266">new</a>&nbsp;&nbsp;
+      <a href="#M001278">references</a>&nbsp;&nbsp;
+      <a href="#M001274">remove</a>&nbsp;&nbsp;
+      <a href="#M001281">remove_belongs_to</a>&nbsp;&nbsp;
+      <a href="#M001275">remove_index</a>&nbsp;&nbsp;
+      <a href="#M001280">remove_references</a>&nbsp;&nbsp;
+      <a href="#M001276">remove_timestamps</a>&nbsp;&nbsp;
+      <a href="#M001277">rename</a>&nbsp;&nbsp;
+      <a href="#M001271">timestamps</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M001266" class="method-detail">
+        <a name="M001266"></a>
+
+        <div class="method-heading">
+          <a href="#M001266" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(table_name, base)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001266-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001266-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 574</span>
+574:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">base</span>)
+575:         <span class="ruby-ivar">@table_name</span> = <span class="ruby-identifier">table_name</span>
+576:         <span class="ruby-ivar">@base</span> = <span class="ruby-identifier">base</span>
+577:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001279" class="method-detail">
+        <a name="M001279"></a>
+
+        <div class="method-heading">
+          <span class="method-name">belongs_to</span><span class="method-args">(*args)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Table.html#M001278">references</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M001272" class="method-detail">
+        <a name="M001272"></a>
+
+        <div class="method-heading">
+          <a href="#M001272" class="method-signature">
+          <span class="method-name">change</span><span class="method-args">(column_name, type, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Changes the <a href="Table.html#M001267">column</a>&#8216;s definition
+according to the <a href="Table.html#M001266">new</a> options. See <a
+href="TableDefinition.html#M001244">TableDefinition#column</a> for details
+of the options you can use.
+</p>
+<h5>Examples</h5>
+<pre>
+ t.change(:name, :string, :limit =&gt; 80)
+ t.change(:description, :text)
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001272-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001272-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 624</span>
+624:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">change</span>(<span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
+625:         <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">change_column</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>)
+626:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001273" class="method-detail">
+        <a name="M001273"></a>
+
+        <div class="method-heading">
+          <a href="#M001273" class="method-signature">
+          <span class="method-name">change_default</span><span class="method-args">(column_name, default)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets a <a href="Table.html#M001266">new</a> default value for a <a
+href="Table.html#M001267">column</a>. See <a
+href="SchemaStatements.html#M001196">SchemaStatements#change_column_default</a>
+</p>
+<h5>Examples</h5>
+<pre>
+ t.change_default(:qualification, 'new')
+ t.change_default(:authorized, 1)
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001273-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001273-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 632</span>
+632:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">change_default</span>(<span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">default</span>)
+633:         <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">change_column_default</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">default</span>)
+634:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001267" class="method-detail">
+        <a name="M001267"></a>
+
+        <div class="method-heading">
+          <a href="#M001267" class="method-signature">
+          <span class="method-name">column</span><span class="method-args">(column_name, type, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds a <a href="Table.html#M001266">new</a> <a
+href="Table.html#M001267">column</a> to the named table. See <a
+href="TableDefinition.html#M001244">TableDefinition#column</a> for details
+of the options you can use.
+</p>
+<h5>Example</h5>
+<h6>Creating a simple <a href="Table.html#M001267">column</a></h6>
+<pre>
+ t.column(:name, :string)
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001267-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001267-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 584</span>
+584:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">column</span>(<span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
+585:         <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">add_column</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>)
+586:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001268" class="method-detail">
+        <a name="M001268"></a>
+
+        <div class="method-heading">
+          <a href="#M001268" class="method-signature">
+          <span class="method-name">column_exists?</span><span class="method-args">(column_name, type = nil, options = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Checks to see if a <a href="Table.html#M001267">column</a> exists. See
+SchemaStatements#column_exists?
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001268-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001268-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 589</span>
+589:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">column_exists?</span>(<span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+590:         <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">column_exists?</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>)
+591:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001269" class="method-detail">
+        <a name="M001269"></a>
+
+        <div class="method-heading">
+          <a href="#M001269" class="method-signature">
+          <span class="method-name">index</span><span class="method-args">(column_name, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds a <a href="Table.html#M001266">new</a> <a
+href="Table.html#M001269">index</a> to the table. <tt>column_name</tt> can
+be a single Symbol, or an Array of Symbols. See <a
+href="SchemaStatements.html#M001198">SchemaStatements#add_index</a>
+</p>
+<h5>Examples</h5>
+<h6>Creating a simple <a href="Table.html#M001269">index</a></h6>
+<pre>
+ t.index(:name)
+</pre>
+<h6>Creating a unique <a href="Table.html#M001269">index</a></h6>
+<pre>
+ t.index([:branch_id, :party_id], :unique =&gt; true)
+</pre>
+<h6>Creating a named <a href="Table.html#M001269">index</a></h6>
+<pre>
+ t.index([:branch_id, :party_id], :unique =&gt; true, :name =&gt; 'by_branch_party')
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001269-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001269-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 603</span>
+603:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>(<span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span> = {})
+604:         <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">add_index</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span>)
+605:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001270" class="method-detail">
+        <a name="M001270"></a>
+
+        <div class="method-heading">
+          <a href="#M001270" class="method-signature">
+          <span class="method-name">index_exists?</span><span class="method-args">(column_name, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Checks to see if an <a href="Table.html#M001269">index</a> exists. See
+SchemaStatements#index_exists?
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001270-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001270-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 608</span>
+608:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index_exists?</span>(<span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span> = {})
+609:         <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">index_exists?</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span>)
+610:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001278" class="method-detail">
+        <a name="M001278"></a>
+
+        <div class="method-heading">
+          <a href="#M001278" class="method-signature">
+          <span class="method-name">references</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds a reference. Optionally adds a <tt>type</tt> <a
+href="Table.html#M001267">column</a>. <tt><a
+href="Table.html#M001278">references</a></tt> and <tt><a
+href="Table.html#M001279">belongs_to</a></tt> are acceptable.
+</p>
+<h5>Examples</h5>
+<pre>
+ t.references(:goat)
+ t.references(:goat, :polymorphic =&gt; true)
+ t.belongs_to(:goat)
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001278-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001278-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 679</span>
+679:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">references</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+680:         <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+681:         <span class="ruby-identifier">polymorphic</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:polymorphic</span>)
+682:         <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">col</span><span class="ruby-operator">|</span>
+683:           <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">add_column</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-node">&quot;#{col}_id&quot;</span>, <span class="ruby-identifier">:integer</span>, <span class="ruby-identifier">options</span>)
+684:           <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">add_column</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-node">&quot;#{col}_type&quot;</span>, <span class="ruby-identifier">:string</span>, <span class="ruby-identifier">polymorphic</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">polymorphic</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">options</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">polymorphic</span>.<span class="ruby-identifier">nil?</span>
+685:         <span class="ruby-keyword kw">end</span>
+686:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001274" class="method-detail">
+        <a name="M001274"></a>
+
+        <div class="method-heading">
+          <a href="#M001274" class="method-signature">
+          <span class="method-name">remove</span><span class="method-args">(*column_names)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Removes the <a href="Table.html#M001267">column</a>(s) from the table
+definition.
+</p>
+<h5>Examples</h5>
+<pre>
+ t.remove(:qualification)
+ t.remove(:qualification, :experience)
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001274-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001274-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 640</span>
+640:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">column_names</span>)
+641:         <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">remove_column</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-identifier">column_names</span>)
+642:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001281" class="method-detail">
+        <a name="M001281"></a>
+
+        <div class="method-heading">
+          <span class="method-name">remove_belongs_to</span><span class="method-args">(*args)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Table.html#M001280">remove_references</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M001275" class="method-detail">
+        <a name="M001275"></a>
+
+        <div class="method-heading">
+          <a href="#M001275" class="method-signature">
+          <span class="method-name">remove_index</span><span class="method-args">(options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Removes the given <a href="Table.html#M001269">index</a> from the table.
+</p>
+<h5>Examples</h5>
+<h6>Remove the suppliers_name_index in the suppliers table</h6>
+<pre>
+  t.remove_index :name
+</pre>
+<h6>Remove the <a href="Table.html#M001269">index</a> named accounts_branch_id_index in the accounts table</h6>
+<pre>
+  t.remove_index :column =&gt; :branch_id
+</pre>
+<h6>Remove the <a href="Table.html#M001269">index</a> named accounts_branch_id_party_id_index in the accounts table</h6>
+<pre>
+  t.remove_index :column =&gt; [:branch_id, :party_id]
+</pre>
+<h6>Remove the <a href="Table.html#M001269">index</a> named by_branch_party in the accounts table</h6>
+<pre>
+  t.remove_index :name =&gt; :by_branch_party
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001275-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001275-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 655</span>
+655:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_index</span>(<span class="ruby-identifier">options</span> = {})
+656:         <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">remove_index</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-identifier">options</span>)
+657:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001280" class="method-detail">
+        <a name="M001280"></a>
+
+        <div class="method-heading">
+          <a href="#M001280" class="method-signature">
+          <span class="method-name">remove_references</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Removes a reference. Optionally removes a <tt>type</tt> <a
+href="Table.html#M001267">column</a>. <tt><a
+href="Table.html#M001280">remove_references</a></tt> and <tt><a
+href="Table.html#M001281">remove_belongs_to</a></tt> are acceptable.
+</p>
+<h5>Examples</h5>
+<pre>
+ t.remove_references(:goat)
+ t.remove_references(:goat, :polymorphic =&gt; true)
+ t.remove_belongs_to(:goat)
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001280-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001280-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 695</span>
+695:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_references</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+696:         <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+697:         <span class="ruby-identifier">polymorphic</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:polymorphic</span>)
+698:         <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">col</span><span class="ruby-operator">|</span>
+699:           <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">remove_column</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-node">&quot;#{col}_id&quot;</span>)
+700:           <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">remove_column</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-node">&quot;#{col}_type&quot;</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">polymorphic</span>.<span class="ruby-identifier">nil?</span>
+701:         <span class="ruby-keyword kw">end</span>
+702:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001276" class="method-detail">
+        <a name="M001276"></a>
+
+        <div class="method-heading">
+          <a href="#M001276" class="method-signature">
+          <span class="method-name">remove_timestamps</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Removes the timestamp columns (created_at and updated_at) from the table.
+</p>
+<h5>Example</h5>
+<pre>
+ t.remove_timestamps
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001276-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001276-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 662</span>
+662:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_timestamps</span>
+663:         <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">remove_timestamps</span>(<span class="ruby-ivar">@table_name</span>)
+664:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001277" class="method-detail">
+        <a name="M001277"></a>
+
+        <div class="method-heading">
+          <a href="#M001277" class="method-signature">
+          <span class="method-name">rename</span><span class="method-args">(column_name, new_column_name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Renames a <a href="Table.html#M001267">column</a>.
+</p>
+<h5>Example</h5>
+<pre>
+ t.rename(:description, :name)
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001277-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001277-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 669</span>
+669:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rename</span>(<span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">new_column_name</span>)
+670:         <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">rename_column</span>(<span class="ruby-ivar">@table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">new_column_name</span>)
+671:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001271" class="method-detail">
+        <a name="M001271"></a>
+
+        <div class="method-heading">
+          <a href="#M001271" class="method-signature">
+          <span class="method-name">timestamps</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds <a href="Table.html#M001271">timestamps</a> (created_at and
+updated_at) columns to the table. See <a
+href="SchemaStatements.html#M001206">SchemaStatements#add_timestamps</a>
+</p>
+<h5>Example</h5>
+<pre>
+ t.timestamps
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001271-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001271-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 615</span>
+615:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">timestamps</span>
+616:         <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">add_timestamps</span>(<span class="ruby-ivar">@table_name</span>)
+617:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

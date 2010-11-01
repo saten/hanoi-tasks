@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActionView::Helpers::CaptureHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActionView::Helpers::CaptureHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/actionpack-3_0_1/lib/action_view/helpers/capture_helper_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/helpers/capture_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+<a href="CaptureHelper.html">CaptureHelper</a> exposes methods to let you
+extract generated markup which can be used in other parts of a template or
+layout file.
+</p>
+<p>
+It provides a method to <a href="CaptureHelper.html#M001925">capture</a>
+blocks into variables through <a
+href="CaptureHelper.html#M001925">capture</a> and a way to <a
+href="CaptureHelper.html#M001925">capture</a> a block of markup for use in
+a layout through <a href="CaptureHelper.html#M001926">content_for</a>.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001925">capture</a>&nbsp;&nbsp;
+      <a href="#M001926">content_for</a>&nbsp;&nbsp;
+      <a href="#M001927">content_for?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001925" class="method-detail">
+        <a name="M001925"></a>
+
+        <div class="method-heading">
+          <a href="#M001925" class="method-signature">
+          <span class="method-name">capture</span><span class="method-args">(*args) {|*args| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The <a href="CaptureHelper.html#M001925">capture</a> method allows you to
+extract part of a template into a variable. You can then use this variable
+anywhere in your templates or layout.
+</p>
+<h4>Examples</h4>
+<p>
+The <a href="CaptureHelper.html#M001925">capture</a> method can be used in
+ERb templates&#8230;
+</p>
+<pre>
+  &lt;% @greeting = capture do %&gt;
+    Welcome to my shiny new web page!  The date and time is
+    &lt;%= Time.now %&gt;
+  &lt;% end %&gt;
+</pre>
+<p>
+&#8230;and Builder (RXML) templates.
+</p>
+<pre>
+  @timestamp = capture do
+    &quot;The current timestamp is #{Time.now}.&quot;
+  end
+</pre>
+<p>
+You can then use that variable anywhere else. For example:
+</p>
+<pre>
+  &lt;html&gt;
+  &lt;head&gt;&lt;title&gt;&lt;%= @greeting %&gt;&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+  &lt;b&gt;&lt;%= @greeting %&gt;&lt;/b&gt;
+  &lt;/body&gt;&lt;/html&gt;
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001925-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001925-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/helpers/capture_helper.rb, line 37</span>
+37:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">capture</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+38:         <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">nil</span>
+39:         <span class="ruby-identifier">buffer</span> = <span class="ruby-identifier">with_output_buffer</span> { <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">yield</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) }
+40:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">string</span> = <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">presence</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">value</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+41:           <span class="ruby-constant">NonConcattingString</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">string</span>)
+42:         <span class="ruby-keyword kw">end</span>
+43:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001926" class="method-detail">
+        <a name="M001926"></a>
+
+        <div class="method-heading">
+          <a href="#M001926" class="method-signature">
+          <span class="method-name">content_for</span><span class="method-args">(name, content = nil, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Calling <a href="CaptureHelper.html#M001926">content_for</a> stores a block
+of markup in an identifier for later use. You can make subsequent calls to
+the stored content in other templates, helper modules or the layout by
+passing the identifier as an argument to <tt><a
+href="CaptureHelper.html#M001926">content_for</a></tt>.
+</p>
+<p>
+Note: <tt>yield</tt> can still be used to retrieve the stored content, but
+calling <tt>yield</tt> doesn&#8216;t work in helper modules, while <tt><a
+href="CaptureHelper.html#M001926">content_for</a></tt> does.
+</p>
+<h4>Examples</h4>
+<pre>
+  &lt;% content_for :not_authorized do %&gt;
+    alert('You are not authorized to do that!')
+  &lt;% end %&gt;
+</pre>
+<p>
+You can then use <tt><a href="CaptureHelper.html#M001926">content_for</a>
+:not_authorized</tt> anywhere in your templates.
+</p>
+<pre>
+  &lt;%= content_for :not_authorized if current_user.nil? %&gt;
+</pre>
+<p>
+This is equivalent to:
+</p>
+<pre>
+  &lt;%= yield :not_authorized if current_user.nil? %&gt;
+</pre>
+<p>
+<tt><a href="CaptureHelper.html#M001926">content_for</a></tt>, however, can
+also be used in helper modules.
+</p>
+<pre>
+  module StorageHelper
+    def stored_content
+      content_for(:storage) || &quot;Your storage is empty&quot;
+    end
+  end
+</pre>
+<p>
+This helper works just like normal helpers.
+</p>
+<pre>
+  &lt;%= stored_content %&gt;
+</pre>
+<p>
+You can use the <tt>yield</tt> syntax alongside an existing call to
+<tt>yield</tt> in a layout. For example:
+</p>
+<pre>
+  &lt;%# This is the layout %&gt;
+  &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Website&lt;/title&gt;
+    &lt;%= yield :script %&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;%= yield %&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+</pre>
+<p>
+And now, we&#8216;ll create a view that has a <tt><a
+href="CaptureHelper.html#M001926">content_for</a></tt> call that creates
+the <tt>script</tt> identifier.
+</p>
+<pre>
+  &lt;%# This is our view %&gt;
+  Please login!
+
+  &lt;% content_for :script do %&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;alert('You are not authorized to view this page!')&lt;/script&gt;
+  &lt;% end %&gt;
+</pre>
+<p>
+Then, in another view, you could to do something like this:
+</p>
+<pre>
+  &lt;%= link_to 'Logout', :action =&gt; 'logout', :remote =&gt; true %&gt;
+
+  &lt;% content_for :script do %&gt;
+    &lt;%= javascript_include_tag :defaults %&gt;
+  &lt;% end %&gt;
+</pre>
+<p>
+That will place <tt>script</tt> tags for Prototype, Scriptaculous, and
+application.js (if it exists) on the page; this technique is useful if
+you&#8216;ll only be using these scripts in a few views.
+</p>
+<p>
+Note that <a href="CaptureHelper.html#M001926">content_for</a> concatenates
+the blocks it is given for a particular identifier in order. For example:
+</p>
+<pre>
+  &lt;% content_for :navigation do %&gt;
+    &lt;li&gt;&lt;%= link_to 'Home', :action =&gt; 'index' %&gt;&lt;/li&gt;
+  &lt;% end %&gt;
+
+  &lt;%#  Add some other content, or use a different template: %&gt;
+
+  &lt;% content_for :navigation do %&gt;
+    &lt;li&gt;&lt;%= link_to 'Login', :action =&gt; 'login' %&gt;&lt;/li&gt;
+  &lt;% end %&gt;
+</pre>
+<p>
+Then, in another template or layout, this code would render both links in
+order:
+</p>
+<pre>
+  &lt;ul&gt;&lt;%= content_for :navigation %&gt;&lt;/ul&gt;
+</pre>
+<p>
+Lastly, simple content can be passed as a parameter:
+</p>
+<pre>
+  &lt;% content_for :script, javascript_include_tag(:defaults) %&gt;
+</pre>
+<p>
+WARNING: <a href="CaptureHelper.html#M001926">content_for</a> is ignored in
+caches. So you shouldn&#8216;t use it for elements that will be fragment
+cached.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001926-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001926-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/helpers/capture_helper.rb, line 135</span>
+135:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">content_for</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">content</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+136:         <span class="ruby-identifier">content</span> = <span class="ruby-identifier">capture</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+137:         <span class="ruby-ivar">@_content_for</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">content</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">content</span>
+138:         <span class="ruby-ivar">@_content_for</span>[<span class="ruby-identifier">name</span>] <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">content</span>
+139:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001927" class="method-detail">
+        <a name="M001927"></a>
+
+        <div class="method-heading">
+          <a href="#M001927" class="method-signature">
+          <span class="method-name">content_for?</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="CaptureHelper.html#M001927">content_for?</a> simply checks whether
+any content has been captured yet using <a
+href="CaptureHelper.html#M001926">content_for</a> Useful to render parts of
+your layout differently based on what is in your views.
+</p>
+<h4>Examples</h4>
+<p>
+Perhaps you will use different css in you layout if no <a
+href="CaptureHelper.html#M001926">content_for</a> :right_column
+</p>
+<pre>
+  &lt;%# This is the layout %&gt;
+  &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Website&lt;/title&gt;
+    &lt;%= yield :script %&gt;
+  &lt;/head&gt;
+  &lt;body class=&quot;&lt;%= content_for?(:right_col) ? 'one-column' : 'two-column' %&gt;&quot;&gt;
+    &lt;%= yield %&gt;
+    &lt;%= yield :right_col %&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001927-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001927-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_view/helpers/capture_helper.rb, line 159</span>
+159:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">content_for?</span>(<span class="ruby-identifier">name</span>)
+160:         <span class="ruby-ivar">@_content_for</span>[<span class="ruby-identifier">name</span>].<span class="ruby-identifier">present?</span>
+161:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

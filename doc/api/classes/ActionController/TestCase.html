@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActionController::TestCase</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActionController::TestCase</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/actionpack-3_0_1/lib/action_controller/test_case_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_controller/test_case.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../ActiveSupport/TestCase.html">
+                ActiveSupport::TestCase
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Superclass for ActionController functional tests. Functional tests allow
+you to test a single controller action per test method. This should not be
+confused with integration tests (see ActionController::IntegrationTest),
+which are more like &quot;stories&quot; that can involve multiple
+controllers and multiple actions (i.e. multiple different HTTP requests).
+</p>
+<h2>Basic example</h2>
+<p>
+Functional tests are written as follows:
+</p>
+<ol>
+<li>First, one uses the <tt>get</tt>, <tt>post</tt>, <tt>put</tt>,
+<tt>delete</tt> or <tt>head</tt> method to simulate an HTTP request.
+
+</li>
+<li>Then, one asserts whether the current state is as expected.
+&quot;State&quot; can be anything: the controller&#8216;s HTTP response,
+the database contents, etc.
+
+</li>
+</ol>
+<p>
+For example:
+</p>
+<pre>
+  class BooksControllerTest &lt; ActionController::TestCase
+    def test_create
+      # Simulate a POST response with the given HTTP parameters.
+      post(:create, :book =&gt; { :title =&gt; &quot;Love Hina&quot; })
+
+      # Assert that the controller tried to redirect us to
+      # the created book's URI.
+      assert_response :found
+
+      # Assert that the controller really put the book in the database.
+      assert_not_nil Book.find_by_title(&quot;Love Hina&quot;)
+    end
+  end
+</pre>
+<h2>Special instance variables</h2>
+<p>
+<a href="TestCase.html">ActionController::TestCase</a> will also
+automatically provide the following instance variables for use in the
+tests:
+</p>
+<table>
+<tr><td valign="top"><b>@controller</b>:</td><td>The controller instance that will be tested.
+
+</td></tr>
+<tr><td valign="top"><b>@request</b>:</td><td>An ActionController::TestRequest, representing the current HTTP request.
+You can modify this object before sending the HTTP request. For example,
+you might want to set some session properties before sending a GET request.
+
+</td></tr>
+<tr><td valign="top"><b>@response</b>:</td><td>An <a href="TestResponse.html">ActionController::TestResponse</a> object,
+representing the response of the last HTTP response. In the above example,
+<tt>@response</tt> becomes valid after calling <tt>post</tt>. If the
+various assert methods are not sufficient, then you may use this object to
+inspect the HTTP response in detail.
+
+</td></tr>
+</table>
+<p>
+(Earlier versions of <a href="../Rails.html">Rails</a> required each
+functional test to subclass Test::Unit::TestCase and define @controller,
+@request, @response in <tt>setup</tt>.)
+</p>
+<h2>Controller is automatically inferred</h2>
+<p>
+<a href="TestCase.html">ActionController::TestCase</a> will automatically
+infer the controller under test from the test class name. If the controller
+cannot be inferred from the test class name, you can explicitly set it with
+<tt>tests</tt>.
+</p>
+<pre>
+  class SpecialEdgeCaseWidgetsControllerTest &lt; ActionController::TestCase
+    tests WidgetController
+  end
+</pre>
+<h2><a href="Testing.html">Testing</a> controller internals</h2>
+<p>
+In addition to these specific assertions, you also have easy access to
+various collections that the regular test/unit assertions can be used
+against. These collections are:
+</p>
+<ul>
+<li>assigns: Instance variables assigned in the action that are available for
+the view.
+
+</li>
+<li>session: Objects being saved in the session.
+
+</li>
+<li>flash: The flash objects currently in the session.
+
+</li>
+<li>cookies: <a href="Cookies.html">Cookies</a> being sent to the user on this
+request.
+
+</li>
+</ul>
+<p>
+These collections can be used just like any other hash:
+</p>
+<pre>
+  assert_not_nil assigns(:person) # makes sure that a @person instance variable was set
+  assert_equal &quot;Dave&quot;, cookies[:name] # makes sure that a cookie called :name was set as &quot;Dave&quot;
+  assert flash.empty? # makes sure that there's nothing in the flash
+</pre>
+<p>
+For historic reasons, the assigns hash uses string-based keys. So
+assigns[:person] won&#8216;t work, but assigns[&quot;person&quot;] will. To
+appease our yearning for symbols, though, an alternative accessor has been
+devised using a method call instead of index referencing. So
+assigns(:person) will work just like assigns[&quot;person&quot;], but
+again, assigns[:person] will not work.
+</p>
+<p>
+On top of the collections, you have the complete url that a given action
+redirected to available in redirect_to_url.
+</p>
+<p>
+For redirects within the same controller, you can even call follow_redirect
+and the redirect will be followed, triggering another action call which can
+then be asserted against.
+</p>
+<h2>Manipulating the request collections</h2>
+<p>
+The collections described above link to the response, so you can test if
+what the actions were expected to do happened. But sometimes you also want
+to manipulate these collections in the incoming request. This is really
+only relevant for sessions and cookies, though. For sessions, you just do:
+</p>
+<pre>
+  @request.session[:key] = &quot;value&quot;
+  @request.cookies[&quot;key&quot;] = &quot;value&quot;
+</pre>
+<h2><a href="Testing.html">Testing</a> named routes</h2>
+<p>
+If you&#8216;re using named routes, they can be easily tested using the
+original named routes&#8217; methods straight in the test case. Example:
+</p>
+<pre>
+ assert_redirected_to page_url(:title =&gt; 'foo')
+</pre>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="TestCase/Behavior.html">Behavior</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="TestCase/Behavior.html" class="link">ActionController::TestCase::Behavior</a><br />
+Module <a href="TestCase/RaiseActionExceptions.html" class="link">ActionController::TestCase::RaiseActionExceptions</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

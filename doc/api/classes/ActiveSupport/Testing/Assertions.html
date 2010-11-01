@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveSupport::Testing::Assertions</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveSupport::Testing::Assertions</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activesupport-3_0_1/lib/active_support/testing/assertions_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/testing/assertions.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000424">assert_blank</a>&nbsp;&nbsp;
+      <a href="#M000422">assert_difference</a>&nbsp;&nbsp;
+      <a href="#M000423">assert_no_difference</a>&nbsp;&nbsp;
+      <a href="#M000425">assert_present</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000424" class="method-detail">
+        <a name="M000424"></a>
+
+        <div class="method-heading">
+          <a href="#M000424" class="method-signature">
+          <span class="method-name">assert_blank</span><span class="method-args">(object, message=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="../../Test.html">Test</a> if an expression is blank. Passes if
+object.blank? is true.
+</p>
+<pre>
+  assert_blank [] # =&gt; true
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000424-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000424-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/testing/assertions.rb, line 70</span>
+70:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_blank</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">message</span>=<span class="ruby-keyword kw">nil</span>)
+71:         <span class="ruby-identifier">message</span> <span class="ruby-operator">||=</span> <span class="ruby-node">&quot;#{object.inspect} is not blank&quot;</span>
+72:         <span class="ruby-identifier">assert</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">blank?</span>, <span class="ruby-identifier">message</span>
+73:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000422" class="method-detail">
+        <a name="M000422"></a>
+
+        <div class="method-heading">
+          <a href="#M000422" class="method-signature">
+          <span class="method-name">assert_difference</span><span class="method-args">(expression, difference = 1, message = nil) {|| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="../../Test.html">Test</a> numeric difference between the return
+value of an expression as a result of what is evaluated in the yielded
+block.
+</p>
+<pre>
+  assert_difference 'Article.count' do
+    post :create, :article =&gt; {...}
+  end
+</pre>
+<p>
+An arbitrary expression is passed in and evaluated.
+</p>
+<pre>
+  assert_difference 'assigns(:article).comments(:reload).size' do
+    post :create, :comment =&gt; {...}
+  end
+</pre>
+<p>
+An arbitrary positive or negative difference can be specified. The default
+is +1.
+</p>
+<pre>
+  assert_difference 'Article.count', -1 do
+    post :delete, :id =&gt; ...
+  end
+</pre>
+<p>
+An array of expressions can also be passed in and evaluated.
+</p>
+<pre>
+  assert_difference [ 'Article.count', 'Post.count' ], +2 do
+    post :create, :article =&gt; {...}
+  end
+</pre>
+<p>
+A error message can be specified.
+</p>
+<pre>
+  assert_difference 'Article.count', -1, &quot;An Article should be destroyed&quot; do
+    post :delete, :id =&gt; ...
+  end
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000422-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000422-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/testing/assertions.rb, line 37</span>
+37:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_difference</span>(<span class="ruby-identifier">expression</span>, <span class="ruby-identifier">difference</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+38:         <span class="ruby-identifier">b</span> = <span class="ruby-identifier">block</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:binding</span>)
+39:         <span class="ruby-identifier">exps</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">expression</span>)
+40:         <span class="ruby-identifier">before</span> = <span class="ruby-identifier">exps</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">b</span>) }
+41: 
+42:         <span class="ruby-keyword kw">yield</span>
+43: 
+44:         <span class="ruby-identifier">exps</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+45:           <span class="ruby-identifier">error</span> = <span class="ruby-node">&quot;#{e.inspect} didn't change by #{difference}&quot;</span>
+46:           <span class="ruby-identifier">error</span> = <span class="ruby-node">&quot;#{message}.\n#{error}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">message</span>
+47:           <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">before</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">difference</span>, <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">b</span>), <span class="ruby-identifier">error</span>)
+48:         <span class="ruby-keyword kw">end</span>
+49:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000423" class="method-detail">
+        <a name="M000423"></a>
+
+        <div class="method-heading">
+          <a href="#M000423" class="method-signature">
+          <span class="method-name">assert_no_difference</span><span class="method-args">(expression, message = nil, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Assertion that the numeric result of evaluating an expression is not
+changed before and after invoking the passed in block.
+</p>
+<pre>
+  assert_no_difference 'Article.count' do
+    post :create, :article =&gt; invalid_attributes
+  end
+</pre>
+<p>
+A error message can be specified.
+</p>
+<pre>
+  assert_no_difference 'Article.count', &quot;An Article should not be destroyed&quot; do
+    post :create, :article =&gt; invalid_attributes
+  end
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000423-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000423-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/testing/assertions.rb, line 63</span>
+63:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_no_difference</span>(<span class="ruby-identifier">expression</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+64:         <span class="ruby-identifier">assert_difference</span> <span class="ruby-identifier">expression</span>, <span class="ruby-value">0</span>, <span class="ruby-identifier">message</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
+65:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000425" class="method-detail">
+        <a name="M000425"></a>
+
+        <div class="method-heading">
+          <a href="#M000425" class="method-signature">
+          <span class="method-name">assert_present</span><span class="method-args">(object, message=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="../../Test.html">Test</a> if an expression is not blank. Passes if
+object.present? is true.
+</p>
+<pre>
+  assert_present {:data =&gt; 'x' } # =&gt; true
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000425-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000425-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/testing/assertions.rb, line 78</span>
+78:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_present</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">message</span>=<span class="ruby-keyword kw">nil</span>)
+79:         <span class="ruby-identifier">message</span> <span class="ruby-operator">||=</span> <span class="ruby-node">&quot;#{object.inspect} is blank&quot;</span>
+80:         <span class="ruby-identifier">assert</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">present?</span>, <span class="ruby-identifier">message</span>
+81:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

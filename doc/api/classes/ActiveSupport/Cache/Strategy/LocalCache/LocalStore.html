@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActiveSupport::Cache::Strategy::LocalCache::LocalStore</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActiveSupport::Cache::Strategy::LocalCache::LocalStore</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activesupport-3_0_1/lib/active_support/cache/strategy/local_cache_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/cache/strategy/local_cache.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Store
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Simple memory backed cache. This cache is not thread safe and is intended
+only for serving as a temporary memory cache for a single thread.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000228">clear</a>&nbsp;&nbsp;
+      <a href="#M000231">delete_entry</a>&nbsp;&nbsp;
+      <a href="#M000227">new</a>&nbsp;&nbsp;
+      <a href="#M000229">read_entry</a>&nbsp;&nbsp;
+      <a href="#M000230">write_entry</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000227" class="method-detail">
+        <a name="M000227"></a>
+
+        <div class="method-heading">
+          <a href="#M000227" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000227-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000227-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/cache/strategy/local_cache.rb, line 14</span>
+14:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+15:             <span class="ruby-keyword kw">super</span>
+16:             <span class="ruby-ivar">@data</span> = {}
+17:           <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000228" class="method-detail">
+        <a name="M000228"></a>
+
+        <div class="method-heading">
+          <a href="#M000228" class="method-signature">
+          <span class="method-name">clear</span><span class="method-args">(options = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000228-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000228-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/cache/strategy/local_cache.rb, line 24</span>
+24:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+25:             <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">clear</span>
+26:           <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000231" class="method-detail">
+        <a name="M000231"></a>
+
+        <div class="method-heading">
+          <a href="#M000231" class="method-signature">
+          <span class="method-name">delete_entry</span><span class="method-args">(key, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000231-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000231-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/cache/strategy/local_cache.rb, line 37</span>
+37:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete_entry</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span>)
+38:             <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-ivar">@data</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)
+39:           <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000229" class="method-detail">
+        <a name="M000229"></a>
+
+        <div class="method-heading">
+          <a href="#M000229" class="method-signature">
+          <span class="method-name">read_entry</span><span class="method-args">(key, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000229-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000229-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/cache/strategy/local_cache.rb, line 28</span>
+28:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">read_entry</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span>)
+29:             <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">key</span>]
+30:           <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000230" class="method-detail">
+        <a name="M000230"></a>
+
+        <div class="method-heading">
+          <a href="#M000230" class="method-signature">
+          <span class="method-name">write_entry</span><span class="method-args">(key, value, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000230-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000230-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/cache/strategy/local_cache.rb, line 32</span>
+32:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_entry</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">options</span>)
+33:             <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">value</span>
+34:             <span class="ruby-keyword kw">true</span>
+35:           <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

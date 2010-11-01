@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActiveRecord::ConnectionAdapters::ConnectionPool</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActiveRecord::ConnectionAdapters::ConnectionPool</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activerecord-3_0_1/lib/active_record/connection_adapters/abstract/connection_pool_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../../Object.html">
+                Object
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Connection pool base class for managing Active Record database connections.
+</p>
+<h2>Introduction</h2>
+<p>
+A <a href="ConnectionPool.html#M001395">connection</a> pool synchronizes
+thread access to a limited number of database connections. The basic idea
+is that each thread checks out a database <a
+href="ConnectionPool.html#M001395">connection</a> from the pool, uses that
+<a href="ConnectionPool.html#M001395">connection</a>, and checks the <a
+href="ConnectionPool.html#M001395">connection</a> back in. <a
+href="ConnectionPool.html">ConnectionPool</a> is completely thread-safe,
+and will ensure that a <a href="ConnectionPool.html#M001395">connection</a>
+cannot be used by two threads at the same time, as long as <a
+href="ConnectionPool.html">ConnectionPool</a>&#8216;s contract is correctly
+followed. It will also handle cases in which there are more threads than
+connections: if all connections have been checked out, and a thread tries
+to <a href="ConnectionPool.html#M001402">checkout</a> a <a
+href="ConnectionPool.html#M001395">connection</a> anyway, then <a
+href="ConnectionPool.html">ConnectionPool</a> will wait until some other
+thread has checked in a <a
+href="ConnectionPool.html#M001395">connection</a>.
+</p>
+<h2>Obtaining (checking out) a <a href="ConnectionPool.html#M001395">connection</a></h2>
+<p>
+Connections can be obtained and used from a <a
+href="ConnectionPool.html#M001395">connection</a> pool in several ways:
+</p>
+<ol>
+<li>Simply use <a href="../Base.html#M001523">ActiveRecord::Base.connection</a>
+as with Active Record 2.1 and earlier (pre-<a
+href="ConnectionPool.html#M001395">connection</a>-pooling). Eventually,
+when you&#8216;re done with the <a
+href="ConnectionPool.html#M001395">connection</a>(s) and wish it to be
+returned to the pool, you call
+ActiveRecord::Base.clear_active_connections!. This will be the default
+behavior for Active Record when used in conjunction with Action
+Pack&#8216;s request handling cycle.
+
+</li>
+<li>Manually check out a <a href="ConnectionPool.html#M001395">connection</a>
+from the pool with <a
+href="../Base.html#M001526">ActiveRecord::Base.connection_pool</a>.<a
+href="ConnectionPool.html#M001402">checkout</a>. You are responsible for
+returning this <a href="ConnectionPool.html#M001395">connection</a> to the
+pool when finished by calling <a
+href="../Base.html#M001526">ActiveRecord::Base.connection_pool</a>.<a
+href="ConnectionPool.html#M001403">checkin</a>(<a
+href="ConnectionPool.html#M001395">connection</a>).
+
+</li>
+<li>Use <a
+href="../Base.html#M001526">ActiveRecord::Base.connection_pool</a>.<a
+href="ConnectionPool.html#M001397">with_connection</a>(&amp;block), which
+obtains a <a href="ConnectionPool.html#M001395">connection</a>, yields it
+as the sole argument to the block, and returns it to the pool after the
+block completes.
+
+</li>
+</ol>
+<p>
+Connections in the pool are actually <a
+href="AbstractAdapter.html">AbstractAdapter</a> objects (or objects
+compatible with <a href="AbstractAdapter.html">AbstractAdapter</a>&#8216;s
+interface).
+</p>
+<h2>Options</h2>
+<p>
+There are two <a
+href="ConnectionPool.html#M001395">connection</a>-pooling-related options
+that you can add to your database <a
+href="ConnectionPool.html#M001395">connection</a> configuration:
+</p>
+<ul>
+<li><tt>pool</tt>: number indicating size of <a
+href="ConnectionPool.html#M001395">connection</a> pool (default 5)
+
+</li>
+<li><tt>wait_timeout</tt>: number of seconds to block and wait for a <a
+href="ConnectionPool.html#M001395">connection</a> before giving up and
+raising a timeout error (default 5 seconds).
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001403">checkin</a>&nbsp;&nbsp;
+      <a href="#M001402">checkout</a>&nbsp;&nbsp;
+      <a href="#M001400">clear_reloadable_connections!</a>&nbsp;&nbsp;
+      <a href="#M001401">clear_stale_cached_connections!</a>&nbsp;&nbsp;
+      <a href="#M001398">connected?</a>&nbsp;&nbsp;
+      <a href="#M001395">connection</a>&nbsp;&nbsp;
+      <a href="#M001399">disconnect!</a>&nbsp;&nbsp;
+      <a href="#M001394">new</a>&nbsp;&nbsp;
+      <a href="#M001396">release_connection</a>&nbsp;&nbsp;
+      <a href="#M001397">with_connection</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">connections</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">spec</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M001394" class="method-detail">
+        <a name="M001394"></a>
+
+        <div class="method-heading">
+          <a href="#M001394" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(spec)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a <a href="ConnectionPool.html#M001394">new</a> <a
+href="ConnectionPool.html">ConnectionPool</a> object. <tt>spec</tt> is a
+ConnectionSpecification object which describes database <a
+href="ConnectionPool.html#M001395">connection</a> information (e.g.
+adapter, host name, username, password, etc), as well as the maximum size
+for this <a href="ConnectionPool.html">ConnectionPool</a>.
+</p>
+<p>
+The default <a href="ConnectionPool.html">ConnectionPool</a> maximum size
+is 5.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001394-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001394-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 67</span>
+67:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">spec</span>)
+68:         <span class="ruby-ivar">@spec</span> = <span class="ruby-identifier">spec</span>
+69: 
+70:         <span class="ruby-comment cmt"># The cache of reserved connections mapped to threads</span>
+71:         <span class="ruby-ivar">@reserved_connections</span> = {}
+72: 
+73:         <span class="ruby-comment cmt"># The mutex used to synchronize pool access</span>
+74:         <span class="ruby-ivar">@connection_mutex</span> = <span class="ruby-constant">Monitor</span>.<span class="ruby-identifier">new</span>
+75:         <span class="ruby-ivar">@queue</span> = <span class="ruby-ivar">@connection_mutex</span>.<span class="ruby-identifier">new_cond</span>
+76: 
+77:         <span class="ruby-comment cmt"># default 5 second timeout unless on ruby 1.9</span>
+78:         <span class="ruby-ivar">@timeout</span> =
+79:           <span class="ruby-keyword kw">if</span> <span class="ruby-constant">RUBY_VERSION</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value str">'1.9'</span>
+80:             <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">config</span>[<span class="ruby-identifier">:wait_timeout</span>] <span class="ruby-operator">||</span> <span class="ruby-value">5</span>
+81:           <span class="ruby-keyword kw">end</span>
+82: 
+83:         <span class="ruby-comment cmt"># default max pool size to 5</span>
+84:         <span class="ruby-ivar">@size</span> = (<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">config</span>[<span class="ruby-identifier">:pool</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">config</span>[<span class="ruby-identifier">:pool</span>].<span class="ruby-identifier">to_i</span>) <span class="ruby-operator">||</span> <span class="ruby-value">5</span>
+85: 
+86:         <span class="ruby-ivar">@connections</span> = []
+87:         <span class="ruby-ivar">@checked_out</span> = []
+88:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001403" class="method-detail">
+        <a name="M001403"></a>
+
+        <div class="method-heading">
+          <a href="#M001403" class="method-signature">
+          <span class="method-name">checkin</span><span class="method-args">(conn)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Check-in a database <a href="ConnectionPool.html#M001395">connection</a>
+back into the pool, indicating that you no longer need this <a
+href="ConnectionPool.html#M001395">connection</a>.
+</p>
+<p>
+<tt>conn</tt>: an <a href="AbstractAdapter.html">AbstractAdapter</a>
+object, which was obtained by earlier by calling <tt><a
+href="ConnectionPool.html#M001402">checkout</a></tt> on this pool.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001403-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001403-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 216</span>
+216:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checkin</span>(<span class="ruby-identifier">conn</span>)
+217:         <span class="ruby-ivar">@connection_mutex</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword kw">do</span>
+218:           <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:_run_checkin_callbacks</span>) <span class="ruby-keyword kw">do</span>
+219:             <span class="ruby-ivar">@checked_out</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">conn</span>
+220:             <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">signal</span>
+221:           <span class="ruby-keyword kw">end</span>
+222:         <span class="ruby-keyword kw">end</span>
+223:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001402" class="method-detail">
+        <a name="M001402"></a>
+
+        <div class="method-heading">
+          <a href="#M001402" class="method-signature">
+          <span class="method-name">checkout</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Check-out a database <a href="ConnectionPool.html#M001395">connection</a>
+from the pool, indicating that you want to use it. You should call <a
+href="ConnectionPool.html#M001403">checkin</a> when you no longer need
+this.
+</p>
+<p>
+This is done by either returning an existing <a
+href="ConnectionPool.html#M001395">connection</a>, or by creating a <a
+href="ConnectionPool.html#M001394">new</a> <a
+href="ConnectionPool.html#M001395">connection</a>. If the maximum number of
+connections for this pool has already been reached, but the pool is empty
+(i.e. they&#8216;re all being used), then this method will wait until a
+thread has checked in a <a
+href="ConnectionPool.html#M001395">connection</a>. The wait time is bounded
+however: if no <a href="ConnectionPool.html#M001395">connection</a> can be
+checked out within the timeout specified for this pool, then a <a
+href="../ConnectionTimeoutError.html">ConnectionTimeoutError</a> exception
+will be raised.
+</p>
+<p>
+Returns: an <a href="AbstractAdapter.html">AbstractAdapter</a> object.
+</p>
+<p>
+Raises:
+</p>
+<ul>
+<li><a href="../ConnectionTimeoutError.html">ConnectionTimeoutError</a>: no <a
+href="ConnectionPool.html#M001395">connection</a> can be obtained from the
+pool within the timeout period.
+
+</li>
+</ul>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001402-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001402-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 187</span>
+187:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">checkout</span>
+188:         <span class="ruby-comment cmt"># Checkout an available connection</span>
+189:         <span class="ruby-ivar">@connection_mutex</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword kw">do</span>
+190:           <span class="ruby-identifier">loop</span> <span class="ruby-keyword kw">do</span>
+191:             <span class="ruby-identifier">conn</span> = <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@checked_out</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">size</span>
+192:                      <span class="ruby-identifier">checkout_existing_connection</span>
+193:                    <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@size</span>
+194:                      <span class="ruby-identifier">checkout_new_connection</span>
+195:                    <span class="ruby-keyword kw">end</span>
+196:             <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">conn</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">conn</span>
+197:             <span class="ruby-comment cmt"># No connections available; wait for one</span>
+198:             <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">wait</span>(<span class="ruby-ivar">@timeout</span>)
+199:               <span class="ruby-keyword kw">next</span>
+200:             <span class="ruby-keyword kw">else</span>
+201:               <span class="ruby-comment cmt"># try looting dead threads</span>
+202:               <span class="ruby-identifier">clear_stale_cached_connections!</span>
+203:               <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@size</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@checked_out</span>.<span class="ruby-identifier">size</span>
+204:                 <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConnectionTimeoutError</span>, <span class="ruby-node">&quot;could not obtain a database connection#{&quot; within #{@timeout} seconds&quot; if @timeout}.  The max pool size is currently #{@size}; consider increasing it.&quot;</span>
+205:               <span class="ruby-keyword kw">end</span>
+206:             <span class="ruby-keyword kw">end</span>
+207:           <span class="ruby-keyword kw">end</span>
+208:         <span class="ruby-keyword kw">end</span>
+209:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001400" class="method-detail">
+        <a name="M001400"></a>
+
+        <div class="method-heading">
+          <a href="#M001400" class="method-signature">
+          <span class="method-name">clear_reloadable_connections!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Clears the cache which maps classes
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001400-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001400-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 136</span>
+136:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear_reloadable_connections!</span>
+137:         <span class="ruby-ivar">@reserved_connections</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">conn</span><span class="ruby-operator">|</span>
+138:           <span class="ruby-identifier">checkin</span> <span class="ruby-identifier">conn</span>
+139:         <span class="ruby-keyword kw">end</span>
+140:         <span class="ruby-ivar">@reserved_connections</span> = {}
+141:         <span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">conn</span><span class="ruby-operator">|</span>
+142:           <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">disconnect!</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">requires_reloading?</span>
+143:         <span class="ruby-keyword kw">end</span>
+144:         <span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">delete_if</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">conn</span><span class="ruby-operator">|</span>
+145:           <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">requires_reloading?</span>
+146:         <span class="ruby-keyword kw">end</span>
+147:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001401" class="method-detail">
+        <a name="M001401"></a>
+
+        <div class="method-heading">
+          <a href="#M001401" class="method-signature">
+          <span class="method-name">clear_stale_cached_connections!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return any checked-out connections back to the pool by threads that are no
+longer alive.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001401-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001401-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 160</span>
+160:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear_stale_cached_connections!</span>
+161:         <span class="ruby-identifier">keys</span> = <span class="ruby-ivar">@reserved_connections</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">-</span> <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+162:           <span class="ruby-identifier">t</span>.<span class="ruby-identifier">alive?</span>
+163:         }.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">thread</span><span class="ruby-operator">|</span> <span class="ruby-identifier">thread</span>.<span class="ruby-identifier">object_id</span> }
+164: 
+165:         <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+166:           <span class="ruby-identifier">checkin</span> <span class="ruby-ivar">@reserved_connections</span>[<span class="ruby-identifier">key</span>]
+167:           <span class="ruby-ivar">@reserved_connections</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)
+168:         <span class="ruby-keyword kw">end</span>
+169:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001398" class="method-detail">
+        <a name="M001398"></a>
+
+        <div class="method-heading">
+          <a href="#M001398" class="method-signature">
+          <span class="method-name">connected?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if a <a href="ConnectionPool.html#M001395">connection</a> has
+already been opened.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001398-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001398-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 119</span>
+119:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">connected?</span>
+120:         <span class="ruby-operator">!</span><span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">empty?</span>
+121:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001395" class="method-detail">
+        <a name="M001395"></a>
+
+        <div class="method-heading">
+          <a href="#M001395" class="method-signature">
+          <span class="method-name">connection</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Retrieve the <a href="ConnectionPool.html#M001395">connection</a>
+associated with the current thread, or call <a
+href="ConnectionPool.html#M001402">checkout</a> to obtain one if necessary.
+</p>
+<p>
+<a href="ConnectionPool.html#M001395">connection</a> can be called any
+number of times; the <a href="ConnectionPool.html#M001395">connection</a>
+is held in a hash keyed by the thread id.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001395-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001395-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 95</span>
+95:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">connection</span>
+96:         <span class="ruby-ivar">@reserved_connections</span>[<span class="ruby-identifier">current_connection_id</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">checkout</span>
+97:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001399" class="method-detail">
+        <a name="M001399"></a>
+
+        <div class="method-heading">
+          <a href="#M001399" class="method-signature">
+          <span class="method-name">disconnect!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Disconnects all connections in the pool, and clears the pool.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001399-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001399-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 124</span>
+124:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">disconnect!</span>
+125:         <span class="ruby-ivar">@reserved_connections</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>,<span class="ruby-identifier">conn</span><span class="ruby-operator">|</span>
+126:           <span class="ruby-identifier">checkin</span> <span class="ruby-identifier">conn</span>
+127:         <span class="ruby-keyword kw">end</span>
+128:         <span class="ruby-ivar">@reserved_connections</span> = {}
+129:         <span class="ruby-ivar">@connections</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">conn</span><span class="ruby-operator">|</span>
+130:           <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">disconnect!</span>
+131:         <span class="ruby-keyword kw">end</span>
+132:         <span class="ruby-ivar">@connections</span> = []
+133:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001396" class="method-detail">
+        <a name="M001396"></a>
+
+        <div class="method-heading">
+          <a href="#M001396" class="method-signature">
+          <span class="method-name">release_connection</span><span class="method-args">(with_id = current_connection_id)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Signal that the thread is finished with the current <a
+href="ConnectionPool.html#M001395">connection</a>. <a
+href="ConnectionPool.html#M001396">release_connection</a> releases the <a
+href="ConnectionPool.html#M001395">connection</a>-thread association and
+returns the <a href="ConnectionPool.html#M001395">connection</a> to the
+pool.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001396-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001396-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 102</span>
+102:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">release_connection</span>(<span class="ruby-identifier">with_id</span> = <span class="ruby-identifier">current_connection_id</span>)
+103:         <span class="ruby-identifier">conn</span> = <span class="ruby-ivar">@reserved_connections</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">with_id</span>)
+104:         <span class="ruby-identifier">checkin</span> <span class="ruby-identifier">conn</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">conn</span>
+105:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001397" class="method-detail">
+        <a name="M001397"></a>
+
+        <div class="method-heading">
+          <a href="#M001397" class="method-signature">
+          <span class="method-name">with_connection</span><span class="method-args">() {|connection| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+If a <a href="ConnectionPool.html#M001395">connection</a> already exists
+yield it to the block. If no <a
+href="ConnectionPool.html#M001395">connection</a> exists <a
+href="ConnectionPool.html#M001402">checkout</a> a <a
+href="ConnectionPool.html#M001395">connection</a>, yield it to the block,
+and <a href="ConnectionPool.html#M001403">checkin</a> the <a
+href="ConnectionPool.html#M001395">connection</a> when finished.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001397-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001397-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 110</span>
+110:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_connection</span>
+111:         <span class="ruby-identifier">connection_id</span> = <span class="ruby-identifier">current_connection_id</span>
+112:         <span class="ruby-identifier">fresh_connection</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@reserved_connections</span>[<span class="ruby-identifier">connection_id</span>]
+113:         <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">connection</span>
+114:       <span class="ruby-keyword kw">ensure</span>
+115:         <span class="ruby-identifier">release_connection</span>(<span class="ruby-identifier">connection_id</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">fresh_connection</span>
+116:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

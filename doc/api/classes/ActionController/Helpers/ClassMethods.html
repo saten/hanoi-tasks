@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActionController::Helpers::ClassMethods</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActionController::Helpers::ClassMethods</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/actionpack-3_0_1/lib/action_controller/metal/helpers_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_controller/metal/helpers.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000712">helper_attr</a>&nbsp;&nbsp;
+      <a href="#M000713">helpers</a>&nbsp;&nbsp;
+      <a href="#M000710">helpers_dir</a>&nbsp;&nbsp;
+      <a href="#M000711">helpers_dir=</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000712" class="method-detail">
+        <a name="M000712"></a>
+
+        <div class="method-heading">
+          <a href="#M000712" class="method-signature">
+          <span class="method-name">helper_attr</span><span class="method-args">(*attrs)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Declares helper accessors for controller attributes. For example, the
+following adds new <tt>name</tt> and <tt>name=</tt> instance methods to a
+controller and makes them available to the view:
+</p>
+<pre>
+  helper_attr :name
+  attr_accessor :name
+</pre>
+<h4>Parameters</h4>
+<table>
+<tr><td valign="top">*attrs&lt;Array[String, Symbol]&gt;:</td><td>Names of attributes to be converted
+
+</td></tr>
+</table>
+<pre>
+  into helpers.
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000712-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000712-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_controller/metal/helpers.rb, line 80</span>
+80:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helper_attr</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attrs</span>)
+81:         <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">helper_method</span>(<span class="ruby-identifier">attr</span>, <span class="ruby-node">&quot;#{attr}=&quot;</span>) }
+82:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000713" class="method-detail">
+        <a name="M000713"></a>
+
+        <div class="method-heading">
+          <a href="#M000713" class="method-signature">
+          <span class="method-name">helpers</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Provides a proxy to access <a href="ClassMethods.html#M000713">helpers</a>
+methods from outside the view.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000713-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000713-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_controller/metal/helpers.rb, line 85</span>
+85:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helpers</span>
+86:         <span class="ruby-ivar">@helper_proxy</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-identifier">_helpers</span>)
+87:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000710" class="method-detail">
+        <a name="M000710"></a>
+
+        <div class="method-heading">
+          <a href="#M000710" class="method-signature">
+          <span class="method-name">helpers_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000710-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000710-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_controller/metal/helpers.rb, line 61</span>
+61:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helpers_dir</span>
+62:         <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;helpers_dir is deprecated, use helpers_path instead&quot;</span>, <span class="ruby-identifier">caller</span>
+63:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">helpers_path</span>
+64:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000711" class="method-detail">
+        <a name="M000711"></a>
+
+        <div class="method-heading">
+          <a href="#M000711" class="method-signature">
+          <span class="method-name">helpers_dir=</span><span class="method-args">(value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000711-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000711-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionpack-3.0.1/lib/action_controller/metal/helpers.rb, line 66</span>
+66:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">helpers_dir=</span>(<span class="ruby-identifier">value</span>)
+67:         <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;helpers_dir= is deprecated, use helpers_path= instead&quot;</span>, <span class="ruby-identifier">caller</span>
+68:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">helpers_path</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">value</span>)
+69:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

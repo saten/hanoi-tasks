@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README.rdoc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../../../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README.rdoc</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>/home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/actionmailer-3.0.1/README.rdoc
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Fri Oct 29 17:37:41 +0200 2010</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Action Mailer &#8212; Easy email delivery and testing</h1>
+<p>
+Action Mailer is a framework for designing email-service layers. These
+layers are used to consolidate code for sending out forgotten passwords,
+welcome wishes on signup, invoices for billing, and any other use case that
+requires a written notification to either a person or another system.
+</p>
+<p>
+Action Mailer is in essence a wrapper around Action Controller and the Mail
+gem. It provides a way to make emails using templates in the same way that
+Action Controller renders views using templates.
+</p>
+<p>
+Additionally, an Action Mailer class can be used to process incoming email,
+such as allowing a weblog to accept new posts from an email (which could
+even have been sent from a phone).
+</p>
+<h2>Sending emails</h2>
+<p>
+The framework works by initializing any instance variables you want to be
+available in the email template, followed by a call to <tt>mail</tt> to
+deliver the email.
+</p>
+<p>
+This can be as simple as:
+</p>
+<pre>
+  class Notifier &lt; ActionMailer::Base
+    delivers_from 'system@loudthinking.com'
+
+    def welcome(recipient)
+      @recipient = recipient
+      mail(:to =&gt; recipient,
+           :subject =&gt; &quot;[Signed up] Welcome #{recipient}&quot;)
+    end
+  end
+</pre>
+<p>
+The body of the email is created by using an Action View template (regular
+ERb) that has the instance variables that are declared in the mailer
+action.
+</p>
+<p>
+So the corresponding body template for the method above could look like
+this:
+</p>
+<pre>
+  Hello there,
+
+  Mr. &lt;%= @recipient %&gt;
+
+  Thank you for signing up!
+</pre>
+<p>
+And if the recipient was given as &quot;david@loudthinking.com&quot;, the
+email generated would look like this:
+</p>
+<pre>
+  Date: Mon, 25 Jan 2010 22:48:09 +1100
+  From: system@loudthinking.com
+  To: david@loudthinking.com
+  Message-ID: &lt;4b5d84f9dd6a5_7380800b81ac29578@void.loudthinking.com.mail&gt;
+  Subject: [Signed up] Welcome david@loudthinking.com
+  Mime-Version: 1.0
+  Content-Type: text/plain;
+        charset=&quot;US-ASCII&quot;;
+  Content-Transfer-Encoding: 7bit
+
+  Hello there,
+
+  Mr. david@loudthinking.com
+</pre>
+<p>
+In previous version of rails you would call <tt>create_method_name</tt> and
+<tt>deliver_method_name</tt>. <a
+href="../../../../../../../../classes/Rails.html">Rails</a> 3.0 has a much
+simpler interface, you simply call the method and optionally call
+<tt>deliver</tt> on the return value.
+</p>
+<p>
+Calling the method returns a Mail Message object:
+</p>
+<pre>
+  message = Notifier.welcome  # =&gt; Returns a Mail::Message object
+  message.deliver             # =&gt; delivers the email
+</pre>
+<p>
+Or you can just chain the methods together like:
+</p>
+<pre>
+  Notifier.welcome.deliver    # Creates the email and sends it immediately
+</pre>
+<h2>Receiving emails</h2>
+<p>
+To receive emails, you need to implement a public instance method called
+<tt>receive</tt> that takes a tmail object as its single parameter. The
+Action Mailer framework has a corresponding class method, which is also
+called <tt>receive</tt>, that accepts a raw, unprocessed email as a string,
+which it then turns into the tmail object and calls the receive instance
+method.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  class Mailman &lt; ActionMailer::Base
+    def receive(email)
+      page = Page.find_by_address(email.to.first)
+      page.emails.create(
+        :subject =&gt; email.subject, :body =&gt; email.body
+      )
+
+      if email.has_attachments?
+        for attachment in email.attachments
+          page.attachments.create({
+            :file =&gt; attachment, :description =&gt; email.subject
+          })
+        end
+      end
+    end
+  end
+</pre>
+<p>
+This Mailman can be the target for Postfix or other MTAs. In <a
+href="../../../../../../../../classes/Rails.html">Rails</a>, you would use
+the runner in the trivial case like this:
+</p>
+<pre>
+  rails runner 'Mailman.receive(STDIN.read)'
+</pre>
+<p>
+However, invoking <a
+href="../../../../../../../../classes/Rails.html">Rails</a> in the runner
+for each mail to be received is very resource intensive. A single instance
+of <a href="../../../../../../../../classes/Rails.html">Rails</a> should be
+run within a daemon if it is going to be utilized to process more than just
+a limited number of email.
+</p>
+<h2>Configuration</h2>
+<p>
+The Base class has the full list of configuration options. Here&#8216;s an
+example:
+</p>
+<pre>
+  ActionMailer::Base.smtp_settings = {
+    :address        =&gt; 'smtp.yourserver.com', # default: localhost
+    :port           =&gt; '25',                  # default: 25
+    :user_name      =&gt; 'user',
+    :password       =&gt; 'pass',
+    :authentication =&gt; :plain                 # :plain, :login or :cram_md5
+  }
+</pre>
+<h2>Download and installation</h2>
+<p>
+The latest version of Action Mailer can be installed with Rubygems:
+</p>
+<pre>
+  % [sudo] gem install actionmailer
+</pre>
+<p>
+Source code can be downloaded as part of the <a
+href="../../../../../../../../classes/Rails.html">Rails</a> project on
+GitHub
+</p>
+<ul>
+<li><a
+href="http://github.com/rails/rails/tree/master/actionmailer">github.com/rails/rails/tree/master/actionmailer</a>/
+
+</li>
+</ul>
+<h2>License</h2>
+<p>
+Action Mailer is released under the MIT license.
+</p>
+<h2>Support</h2>
+<p>
+API documentation is at
+</p>
+<ul>
+<li><a href="http://api.rubyonrails.com">api.rubyonrails.com</a>
+
+</li>
+</ul>
+<p>
+Bug reports and feature requests can be filed with the rest for the Ruby on
+<a href="../../../../../../../../classes/Rails.html">Rails</a> project
+here:
+</p>
+<ul>
+<li><a
+href="https://rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets">rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets</a>
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

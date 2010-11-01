@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveModel::AttributeMethods</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveModel::AttributeMethods</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/attribute_methods_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/attribute_methods.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2>Active Model Attribute Methods</h2>
+<p>
+<tt><a href="AttributeMethods.html">ActiveModel::AttributeMethods</a></tt>
+provides a way to add prefixes and suffixes to your methods as well as
+handling the creation of Active Record like class methods such as
+<tt>table_name</tt>.
+</p>
+<p>
+The requirements to implement <a
+href="AttributeMethods.html">ActiveModel::AttributeMethods</a> are to:
+</p>
+<ul>
+<li><tt>include <a
+href="AttributeMethods.html">ActiveModel::AttributeMethods</a></tt> in your
+object
+
+</li>
+<li>Call each Attribute Method module method you want to add, such as
+attribute_method_suffix or attribute_method_prefix
+
+</li>
+<li>Call <tt>define_attribute_methods</tt> after the other methods are called.
+
+</li>
+<li>Define the various generic <tt>_attribute</tt> methods that you have
+declared
+
+</li>
+</ul>
+<p>
+A minimal implementation could be:
+</p>
+<pre>
+  class Person
+    include ActiveModel::AttributeMethods
+
+    attribute_method_affix  :prefix =&gt; 'reset_', :suffix =&gt; '_to_default!'
+    attribute_method_suffix '_contrived?'
+    attribute_method_prefix 'clear_'
+    define_attribute_methods ['name']
+
+    attr_accessor :name
+
+    private
+
+    def attribute_contrived?(attr)
+      true
+    end
+
+    def clear_attribute(attr)
+      send(&quot;#{attr}=&quot;, nil)
+    end
+
+    def reset_attribute_to_default!(attr)
+      send(&quot;#{attr}=&quot;, &quot;Default Name&quot;)
+    end
+  end
+</pre>
+<p>
+Notice that whenever you include <a
+href="AttributeMethods.html">ActiveModel::AttributeMethods</a> in your
+class, it requires you to implement a <tt>attributes</tt> methods which
+returns a hash with each attribute name in your model as hash key and the
+attribute value as hash value.
+</p>
+<p>
+Hash keys must be strings.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001620">attribute_method?</a>&nbsp;&nbsp;
+      <a href="#M001618">method_missing</a>&nbsp;&nbsp;
+      <a href="#M001619">respond_to?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="AttributeMethods/ClassMethods.html" class="link">ActiveModel::AttributeMethods::ClassMethods</a><br />
+
+    </div>
+
+
+    <div id="aliases-list">
+      <h3 class="section-bar">External Aliases</h3>
+
+      <div class="name-list">
+                        <table summary="aliases">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">respond_to?</td>
+          <td>-&gt;</td>
+          <td class="context-item-value">respond_to_without_attributes?</td>
+        </tr>
+      <tr class="top-aligned-row context-row">
+        <td>&nbsp;</td>
+        <td colspan="2" class="context-item-desc">
+A Person object with a name attribute can ask
+<tt>person.respond_to?(:name)</tt>, <tt>person.respond_to?(:name=)</tt>,
+and <tt>person.respond_to?(:name?)</tt> which will all return
+<tt>true</tt>.
+
+</td>
+      </tr>
+                        </table>
+      </div>
+    </div>
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001618" class="method-detail">
+        <a name="M001618"></a>
+
+        <div class="method-heading">
+          <a href="#M001618" class="method-signature">
+          <span class="method-name">method_missing</span><span class="method-args">(method_id, *args, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows access to the object attributes, which are held in the
+<tt>@attributes</tt> hash, as though they were first-class methods. So a
+Person class with a name attribute can use Person#name and Person#name= and
+never directly use the attributes hash &#8212; except for multiple assigns
+with ActiveRecord#attributes=. A Milestone class can also ask
+Milestone#completed? to test that the completed attribute is not
+<tt>nil</tt> or 0.
+</p>
+<p>
+It&#8216;s also possible to instantiate related objects, so a Client class
+belonging to the clients table with a <tt>master_id</tt> foreign key can
+instantiate master through Client#master.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001618-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001618-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/attribute_methods.rb, line 362</span>
+362:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">method_id</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+363:       <span class="ruby-identifier">method_name</span> = <span class="ruby-identifier">method_id</span>.<span class="ruby-identifier">to_s</span>
+364:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">match</span> = <span class="ruby-identifier">match_attribute_method?</span>(<span class="ruby-identifier">method_name</span>)
+365:         <span class="ruby-identifier">guard_private_attribute_method!</span>(<span class="ruby-identifier">method_name</span>, <span class="ruby-identifier">args</span>)
+366:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">match</span>.<span class="ruby-identifier">target</span>, <span class="ruby-identifier">match</span>.<span class="ruby-identifier">attr_name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+367:       <span class="ruby-keyword kw">end</span>
+368:       <span class="ruby-keyword kw">super</span>
+369:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001619" class="method-detail">
+        <a name="M001619"></a>
+
+        <div class="method-heading">
+          <a href="#M001619" class="method-signature">
+          <span class="method-name">respond_to?</span><span class="method-args">(method, include_private_methods = false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001619-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001619-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/attribute_methods.rb, line 375</span>
+375:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">include_private_methods</span> = <span class="ruby-keyword kw">false</span>)
+376:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">super</span>
+377:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+378:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">include_private_methods</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">method</span>, <span class="ruby-keyword kw">true</span>)
+379:         <span class="ruby-comment cmt"># If we're here then we haven't found among non-private methods</span>
+380:         <span class="ruby-comment cmt"># but found among all methods. Which means that the given method is private.</span>
+381:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+382:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">match_attribute_method?</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_s</span>)
+383:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+384:       <span class="ruby-keyword kw">end</span>
+385:       <span class="ruby-keyword kw">super</span>
+386:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M001620" class="method-detail">
+        <a name="M001620"></a>
+
+        <div class="method-heading">
+          <a href="#M001620" class="method-signature">
+          <span class="method-name">attribute_method?</span><span class="method-args">(attr_name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001620-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001620-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/attribute_methods.rb, line 389</span>
+389:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attribute_method?</span>(<span class="ruby-identifier">attr_name</span>)
+390:         <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">attr_name</span>)
+391:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

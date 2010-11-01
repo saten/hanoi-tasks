@@ -1,4 +1,8 @@
 HanoiTasks::Application.routes.draw do
+  
+  get "index/index"
+
+  root :to => "index#index"
   resources :task_groups
 
   resources :tasks

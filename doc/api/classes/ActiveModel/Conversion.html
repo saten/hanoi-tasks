@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveModel::Conversion</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveModel::Conversion</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/conversion_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/conversion.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2>Active Model Conversions</h2>
+<p>
+Handles default conversions: <a
+href="Conversion.html#M001645">to_model</a>, <a
+href="Conversion.html#M001646">to_key</a> and <a
+href="Conversion.html#M001647">to_param</a>.
+</p>
+<h2>Example</h2>
+<p>
+Let&#8216;s take for example this non persisted object.
+</p>
+<pre>
+  class ContactMessage
+    include ActiveModel::Conversion
+
+    # ContactMessage are never persisted in the DB
+    def persisted?
+      false
+    end
+  end
+
+  cm = ContactMessage.new
+  cm.to_model == self # =&gt; true
+  cm.to_key           # =&gt; nil
+  cm.to_param         # =&gt; nil
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001646">to_key</a>&nbsp;&nbsp;
+      <a href="#M001645">to_model</a>&nbsp;&nbsp;
+      <a href="#M001647">to_param</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001646" class="method-detail">
+        <a name="M001646"></a>
+
+        <div class="method-heading">
+          <a href="#M001646" class="method-signature">
+          <span class="method-name">to_key</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an <a href="../Enumerable.html">Enumerable</a> of all key
+attributes if any is set, regardless if the object is persisted or not.
+</p>
+<p>
+Note the default implementation uses persisted? just because all objects in
+Ruby 1.8.x responds to :id.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001646-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001646-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/conversion.rb, line 41</span>
+41:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_key</span>
+42:       <span class="ruby-identifier">persisted?</span> <span class="ruby-value">? </span>[<span class="ruby-identifier">id</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+43:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001645" class="method-detail">
+        <a name="M001645"></a>
+
+        <div class="method-heading">
+          <a href="#M001645" class="method-signature">
+          <span class="method-name">to_model</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+If your object is already designed to implement all of the Active Model you
+can use the default <a href="Conversion.html#M001645">to_model</a>
+implementation, which simply returns self.
+</p>
+<p>
+If your model does not act like an Active Model object, then you should
+define <tt>:<a href="Conversion.html#M001645">to_model</a></tt> yourself
+returning a proxy object that wraps your object with Active Model compliant
+methods.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001645-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001645-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/conversion.rb, line 32</span>
+32:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_model</span>
+33:       <span class="ruby-keyword kw">self</span>
+34:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001647" class="method-detail">
+        <a name="M001647"></a>
+
+        <div class="method-heading">
+          <a href="#M001647" class="method-signature">
+          <span class="method-name">to_param</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a string representing the object&#8216;s key suitable for use in
+URLs, or nil if persisted? is false
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001647-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001647-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/conversion.rb, line 47</span>
+47:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_param</span>
+48:       <span class="ruby-identifier">persisted?</span> <span class="ruby-value">? </span><span class="ruby-identifier">to_key</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'-'</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+49:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

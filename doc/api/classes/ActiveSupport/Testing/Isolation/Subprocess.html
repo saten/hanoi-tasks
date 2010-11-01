@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveSupport::Testing::Isolation::Subprocess</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveSupport::Testing::Isolation::Subprocess</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activesupport-3_0_1/lib/active_support/testing/isolation_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/testing/isolation.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000393">run_in_isolation</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ORIG_ARGV</td>
+          <td>=</td>
+          <td class="context-item-value">ARGV.dup unless defined?(ORIG_ARGV)</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000393" class="method-detail">
+        <a name="M000393"></a>
+
+        <div class="method-heading">
+          <a href="#M000393" class="method-signature">
+          <span class="method-name">run_in_isolation</span><span class="method-args">() {|proxy| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Crazy H4X to get this working in windows / jruby with no forking.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000393-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000393-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activesupport-3.0.1/lib/active_support/testing/isolation.rb, line 117</span>
+117:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_in_isolation</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">blk</span>)
+118:           <span class="ruby-identifier">require</span> <span class="ruby-value str">&quot;tempfile&quot;</span>
+119: 
+120:           <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ENV</span>[<span class="ruby-value str">&quot;ISOLATION_TEST&quot;</span>]
+121:             <span class="ruby-identifier">proxy</span> = <span class="ruby-constant">ProxyTestResult</span>.<span class="ruby-identifier">new</span>
+122:             <span class="ruby-identifier">retval</span> = <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">proxy</span>
+123:             <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">ENV</span>[<span class="ruby-value str">&quot;ISOLATION_OUTPUT&quot;</span>], <span class="ruby-value str">&quot;w&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+124:               <span class="ruby-identifier">file</span>.<span class="ruby-identifier">puts</span> [<span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>([<span class="ruby-identifier">retval</span>, <span class="ruby-identifier">proxy</span>])].<span class="ruby-identifier">pack</span>(<span class="ruby-value str">&quot;m&quot;</span>)
+125:             <span class="ruby-keyword kw">end</span>
+126:             <span class="ruby-identifier">exit!</span>
+127:           <span class="ruby-keyword kw">else</span>
+128:             <span class="ruby-constant">Tempfile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-value str">&quot;isolation&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tmpfile</span><span class="ruby-operator">|</span>
+129:               <span class="ruby-constant">ENV</span>[<span class="ruby-value str">&quot;ISOLATION_TEST&quot;</span>]   = <span class="ruby-ivar">@method_name</span>
+130:               <span class="ruby-constant">ENV</span>[<span class="ruby-value str">&quot;ISOLATION_OUTPUT&quot;</span>] = <span class="ruby-identifier">tmpfile</span>.<span class="ruby-identifier">path</span>
+131: 
+132:               <span class="ruby-identifier">load_paths</span> = <span class="ruby-identifier">$-I</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;-I\&quot;#{File.expand_path(p)}\&quot;&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+133:               <span class="ruby-node">`#{Gem.ruby} #{load_paths} #{$0} #{ORIG_ARGV.join(&quot; &quot;)} -t\&quot;#{self.class}\&quot;`</span>
+134: 
+135:               <span class="ruby-constant">ENV</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value str">&quot;ISOLATION_TEST&quot;</span>)
+136:               <span class="ruby-constant">ENV</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value str">&quot;ISOLATION_OUTPUT&quot;</span>)
+137: 
+138:               <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">tmpfile</span>.<span class="ruby-identifier">read</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-value str">&quot;m&quot;</span>)[<span class="ruby-value">0</span>]
+139:             <span class="ruby-keyword kw">end</span>
+140:           <span class="ruby-keyword kw">end</span>
+141:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

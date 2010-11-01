@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ActiveModel::Observer</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ActiveModel::Observer</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activemodel-3_0_1/lib/active_model/observing_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/observing.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../Object.html">
+                Object
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h2>Active Model Observers</h2>
+<p>
+<a href="Observer.html">Observer</a> classes respond to life cycle
+callbacks to implement trigger-like behavior outside the original class.
+This is a great way to reduce the clutter that normally comes when the
+model class is burdened with functionality that doesn&#8216;t pertain to
+the core responsibility of the class. Example:
+</p>
+<pre>
+  class CommentObserver &lt; ActiveModel::Observer
+    def after_save(comment)
+      Notifications.deliver_comment(&quot;admin@do.com&quot;, &quot;New comment was posted&quot;, comment)
+    end
+  end
+</pre>
+<p>
+This <a href="Observer.html">Observer</a> sends an email when a
+Comment#save is finished.
+</p>
+<pre>
+  class ContactObserver &lt; ActiveModel::Observer
+    def after_create(contact)
+      contact.logger.info('New contact added!')
+    end
+
+    def after_destroy(contact)
+      contact.logger.warn(&quot;Contact with an id of #{contact.id} was destroyed!&quot;)
+    end
+  end
+</pre>
+<p>
+This <a href="Observer.html">Observer</a> uses logger to log when specific
+callbacks are triggered.
+</p>
+<h2><a href="Observing.html">Observing</a> a class that can&#8216;t be inferred</h2>
+<p>
+Observers will by default be mapped to the class with which they share a
+name. So CommentObserver will be tied to observing Comment,
+ProductManagerObserver to ProductManager, and so on. If you want to name
+your observer differently than the class you&#8216;re interested in
+observing, you can use the <a
+href="Observer.html#M001723">Observer.observe</a> class method which takes
+either the concrete class (Product) or a symbol for that class (:product):
+</p>
+<pre>
+  class AuditObserver &lt; ActiveModel::Observer
+    observe :account
+
+    def after_update(account)
+      AuditTrail.new(account, &quot;UPDATED&quot;)
+    end
+  end
+</pre>
+<p>
+If the audit observer needs to watch more than one kind of object, this can
+be specified with multiple arguments:
+</p>
+<pre>
+  class AuditObserver &lt; ActiveModel::Observer
+    observe :account, :balance
+
+    def after_update(record)
+      AuditTrail.new(record, &quot;UPDATED&quot;)
+    end
+  end
+</pre>
+<p>
+The AuditObserver will now act on both updates to Account and Balance by
+treating them both as records.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001726">new</a>&nbsp;&nbsp;
+      <a href="#M001723">observe</a>&nbsp;&nbsp;
+      <a href="#M001725">observed_class</a>&nbsp;&nbsp;
+      <a href="#M001724">observed_classes</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name">Singleton</span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M001726" class="method-detail">
+        <a name="M001726"></a>
+
+        <div class="method-heading">
+          <a href="#M001726" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Start observing the declared classes and their subclasses.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001726-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001726-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/observing.rb, line 190</span>
+190:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+191:       <span class="ruby-identifier">observed_classes</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span><span class="ruby-operator">|</span> <span class="ruby-identifier">add_observer!</span>(<span class="ruby-identifier">klass</span>) }
+192:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001723" class="method-detail">
+        <a name="M001723"></a>
+
+        <div class="method-heading">
+          <a href="#M001723" class="method-signature">
+          <span class="method-name">observe</span><span class="method-args">(*models)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Attaches the observer to the supplied model classes.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001723-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001723-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/observing.rb, line 158</span>
+158:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">observe</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">models</span>)
+159:         <span class="ruby-identifier">models</span>.<span class="ruby-identifier">flatten!</span>
+160:         <span class="ruby-identifier">models</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">model</span><span class="ruby-operator">|</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_sym</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">camelize</span>.<span class="ruby-identifier">constantize</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">model</span> }
+161:         <span class="ruby-identifier">remove_possible_method</span>(<span class="ruby-identifier">:observed_classes</span>)
+162:         <span class="ruby-identifier">define_method</span>(<span class="ruby-identifier">:observed_classes</span>) { <span class="ruby-identifier">models</span> }
+163:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001725" class="method-detail">
+        <a name="M001725"></a>
+
+        <div class="method-heading">
+          <a href="#M001725" class="method-signature">
+          <span class="method-name">observed_class</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The class observed by default is inferred from the observer&#8216;s class
+name:
+</p>
+<pre>
+  assert_equal Person, PersonObserver.observed_class
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001725-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001725-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/observing.rb, line 180</span>
+180:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">observed_class</span>
+181:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">observed_class_name</span> = <span class="ruby-identifier">name</span>[<span class="ruby-regexp re">/(.*)Observer/</span>, <span class="ruby-value">1</span>]
+182:           <span class="ruby-identifier">observed_class_name</span>.<span class="ruby-identifier">constantize</span>
+183:         <span class="ruby-keyword kw">else</span>
+184:           <span class="ruby-keyword kw">nil</span>
+185:         <span class="ruby-keyword kw">end</span>
+186:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001724" class="method-detail">
+        <a name="M001724"></a>
+
+        <div class="method-heading">
+          <a href="#M001724" class="method-signature">
+          <span class="method-name">observed_classes</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an array of Classes to <a href="Observer.html#M001723">observe</a>.
+</p>
+<p>
+You can override this instead of using the <tt><a
+href="Observer.html#M001723">observe</a></tt> helper.
+</p>
+<pre>
+  class AuditObserver &lt; ActiveModel::Observer
+    def self.observed_classes
+      [Account, Balance]
+    end
+  end
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001724-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001724-source">
+<pre>
+     <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activemodel-3.0.1/lib/active_model/observing.rb, line 174</span>
+174:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">observed_classes</span>
+175:         <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">observed_class</span>)
+176:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

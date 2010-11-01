@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveRecord::ConnectionAdapters::DatabaseLimits</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveRecord::ConnectionAdapters::DatabaseLimits</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/home/saten/_rvm/gems/ree-1_8_7-2010_02/gems/activerecord-3_0_1/lib/active_record/connection_adapters/abstract/database_limits_rb.html">
+                /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/database_limits.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M001166">column_name_length</a>&nbsp;&nbsp;
+      <a href="#M001171">columns_per_multicolumn_index</a>&nbsp;&nbsp;
+      <a href="#M001169">columns_per_table</a>&nbsp;&nbsp;
+      <a href="#M001172">in_clause_length</a>&nbsp;&nbsp;
+      <a href="#M001168">index_name_length</a>&nbsp;&nbsp;
+      <a href="#M001170">indexes_per_table</a>&nbsp;&nbsp;
+      <a href="#M001174">joins_per_query</a>&nbsp;&nbsp;
+      <a href="#M001173">sql_query_length</a>&nbsp;&nbsp;
+      <a href="#M001165">table_alias_length</a>&nbsp;&nbsp;
+      <a href="#M001167">table_name_length</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M001166" class="method-detail">
+        <a name="M001166"></a>
+
+        <div class="method-heading">
+          <a href="#M001166" class="method-signature">
+          <span class="method-name">column_name_length</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the maximum length of a column name
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001166-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001166-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/database_limits.rb, line 11</span>
+11:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">column_name_length</span>
+12:         <span class="ruby-value">64</span>
+13:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001171" class="method-detail">
+        <a name="M001171"></a>
+
+        <div class="method-heading">
+          <a href="#M001171" class="method-signature">
+          <span class="method-name">columns_per_multicolumn_index</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the maximum number of columns in a multicolumn index
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001171-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001171-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/database_limits.rb, line 36</span>
+36:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">columns_per_multicolumn_index</span>
+37:         <span class="ruby-value">16</span>
+38:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001169" class="method-detail">
+        <a name="M001169"></a>
+
+        <div class="method-heading">
+          <a href="#M001169" class="method-signature">
+          <span class="method-name">columns_per_table</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the maximum number of columns per table
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001169-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001169-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/database_limits.rb, line 26</span>
+26:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">columns_per_table</span>
+27:         <span class="ruby-value">1024</span>
+28:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001172" class="method-detail">
+        <a name="M001172"></a>
+
+        <div class="method-heading">
+          <a href="#M001172" class="method-signature">
+          <span class="method-name">in_clause_length</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the maximum number of elements in an IN (x,y,z) clause
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001172-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001172-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/database_limits.rb, line 41</span>
+41:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">in_clause_length</span>
+42:         <span class="ruby-value">65535</span>
+43:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001168" class="method-detail">
+        <a name="M001168"></a>
+
+        <div class="method-heading">
+          <a href="#M001168" class="method-signature">
+          <span class="method-name">index_name_length</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the maximum length of an index name
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001168-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001168-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/database_limits.rb, line 21</span>
+21:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index_name_length</span>
+22:         <span class="ruby-value">64</span>
+23:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001170" class="method-detail">
+        <a name="M001170"></a>
+
+        <div class="method-heading">
+          <a href="#M001170" class="method-signature">
+          <span class="method-name">indexes_per_table</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the maximum number of indexes per table
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001170-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001170-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/database_limits.rb, line 31</span>
+31:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">indexes_per_table</span>
+32:         <span class="ruby-value">16</span>
+33:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001174" class="method-detail">
+        <a name="M001174"></a>
+
+        <div class="method-heading">
+          <a href="#M001174" class="method-signature">
+          <span class="method-name">joins_per_query</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+maximum number of joins in a single query
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001174-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001174-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/database_limits.rb, line 51</span>
+51:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">joins_per_query</span>
+52:         <span class="ruby-value">256</span>
+53:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001173" class="method-detail">
+        <a name="M001173"></a>
+
+        <div class="method-heading">
+          <a href="#M001173" class="method-signature">
+          <span class="method-name">sql_query_length</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the maximum length of an SQL query
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001173-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001173-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/database_limits.rb, line 46</span>
+46:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sql_query_length</span>
+47:         <span class="ruby-value">1048575</span>
+48:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001165" class="method-detail">
+        <a name="M001165"></a>
+
+        <div class="method-heading">
+          <a href="#M001165" class="method-signature">
+          <span class="method-name">table_alias_length</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the maximum length of a table alias
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001165-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001165-source">
+<pre>
+   <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/database_limits.rb, line 6</span>
+6:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">table_alias_length</span>
+7:         <span class="ruby-value">255</span>
+8:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M001167" class="method-detail">
+        <a name="M001167"></a>
+
+        <div class="method-heading">
+          <a href="#M001167" class="method-signature">
+          <span class="method-name">table_name_length</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+the maximum length of a table name
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M001167-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M001167-source">
+<pre>
+    <span class="ruby-comment cmt"># File /home/saten/.rvm/gems/ree-1.8.7-2010.02/gems/activerecord-3.0.1/lib/active_record/connection_adapters/abstract/database_limits.rb, line 16</span>
+16:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">table_name_length</span>
+17:         <span class="ruby-value">64</span>
+18:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
