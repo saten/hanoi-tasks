@@ -1,5 +1,7 @@
 HanoiTasks::Application.routes.draw do
   
+  resources :players_tasks
+
   get "index/index"
 
   root :to => "index#index"

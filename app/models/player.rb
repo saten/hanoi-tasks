@@ -1,3 +1,4 @@
 class Player < ActiveRecord::Base
-  belongs_to :task
+  has_many :players_tasks
+  has_many :tasks, :through=>:players_tasks
 end

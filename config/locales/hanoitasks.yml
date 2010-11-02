@@ -1,0 +1,12 @@
+it:
+  tasks: Tasks
+  players: Giocatori
+  task_groups: Gruppi
+  index: Home
+  players_tasks: Attività Giocatore
+en:
+  tasks: Tasks
+  players: Players
+  task_groups: Groups
+  index: Index
+  players_tasks: Player's Tasks

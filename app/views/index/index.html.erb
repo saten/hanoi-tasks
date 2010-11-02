@@ -1,6 +1,23 @@
-<div id="links">
-  
-</div>
+
 <div id="status">
   
+  <% TaskGroup.all.each do |tg| %>
+    <div class="task_group">
+      <span class="task_name"><%=h tg.name%></span>
+      <div class="tasks">
+        <% tg.tasks.each do |t|%>
+          <div class="task">
+            <span class="task_name"><%=h t.name%></span>
+            <div class="task_players">
+              <% t.players.each do |p|%>
+                <span class="player_name"><%=h p.nickname%></span>
+                  
+              <% end %>
+            </div>
+          </div>  
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
+

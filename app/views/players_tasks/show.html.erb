@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Player:</b>
+  <%= @players_task.player_id %>
+</p>
+
+<p>
+  <b>Task:</b>
+  <%= @players_task.task_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_players_task_path(@players_task) %> |
+<%= link_to 'Back', players_tasks_path %>

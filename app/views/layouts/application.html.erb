@@ -7,8 +7,26 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-<%#= yield %>
+<div id="links">
+  <ul>
+    <li>
+      <%= link_to t(:index), root_path%>
+    </li>
+    <li>
+      <%= link_to t(:tasks), tasks_path%>
+    </li>
+    <li>
+      <%= link_to t(:players), players_path%>
+    </li>
+    <li>
+      <%= link_to t(:players_tasks), players_tasks_path%>
+    </li>
+    <li>
+      <%= link_to t(:task_groups), task_groups_path%>
+    </li>
+  </ul>
+</div>
+<%= yield %>
 
 </body>
 </html>
