@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101102142855) do
+ActiveRecord::Schema.define(:version => 20101103235803) do
 
   create_table "players", :force => true do |t|
     t.string   "nickname"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20101102142855) do
     t.integer  "task_group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "points",        :default => 0
   end
 
 end

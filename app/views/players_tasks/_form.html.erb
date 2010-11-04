@@ -1,3 +1,6 @@
+<% content_for :head do %>
+<%= javascript_include_tag "players_tasks" %>
+<% end %>
 <%= form_for(@players_task) do |f| %>
   <% if @players_task.errors.any? %>
     <div id="error_explanation">
@@ -13,11 +16,15 @@
 
   <div class="field">
     <%= f.label :player_id %><br />
-    <%= f.text_field :player_id %>
+    <%= f.select :player_id,options_from_collection_for_select(Player.all,:id,:nickname)  %>
+  </div>
+  <div class="field">
+    <%= f.label :task_group_id %><br />
+    <%= select_tag :task_group_id,options_from_collection_for_select(TaskGroup.all,:id,:name)  %>
   </div>
   <div class="field">
     <%= f.label :task_id %><br />
-    <%= f.text_field :task_id %>
+    <%= f.select :task_id,options_from_collection_for_select(Task.all,:id,:name) %>
   </div>
   <div class="actions">
     <%= f.submit %>

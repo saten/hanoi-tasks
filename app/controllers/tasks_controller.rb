@@ -2,11 +2,15 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.xml
   def index
+   if params[:group_id]
+     @tasks=Task.all(:conditions=>["task_group_id = ?",params[:group_id]])
+   else
     @tasks = Task.all
-
+   end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tasks }
+      format.js
     end
   end
 

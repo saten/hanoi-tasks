@@ -4,9 +4,11 @@ it:
   task_groups: Gruppi
   index: Home
   players_tasks: Attività Giocatore
+  availables: Liberi
 en:
   tasks: Tasks
   players: Players
   task_groups: Groups
   index: Index
   players_tasks: Player's Tasks
+  availables: Availables

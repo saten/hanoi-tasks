@@ -1,17 +1,18 @@
-
+<%content_for :head do %>
+  <%= javascript_include_tag "index" %>
+<% end %>
 <div id="status">
   
   <% TaskGroup.all.each do |tg| %>
     <div class="task_group">
-      <span class="task_name"><%=h tg.name%></span>
+      <span class="task_group_name"><%= link_to h(tg.name),tg%></span>
       <div class="tasks">
         <% tg.tasks.each do |t|%>
           <div class="task">
-            <span class="task_name"><%=h t.name%></span>
+            <span class="task_name"><%=link_to h(t.name), t %></span>
             <div class="task_players">
               <% t.players.each do |p|%>
-                <span class="player_name"><%=h p.nickname%></span>
-                  
+                <span class="player_name"><%= link_to h(p.nickname), p%></span>
               <% end %>
             </div>
           </div>  
@@ -19,5 +20,13 @@
       </div>
     </div>
   <% end %>
+  <div id="availables">
+    <span class="availables_title"><%=t(:availables)%></span>
+    <div class="task_players">
+      <% Player.find_all_by_available(true).each do |p| %>
+        <span class="player_name"><%= link_to h(p.nickname), p%></span>
+      <% end %>
+    </div>
+  </div>
 </div>
 

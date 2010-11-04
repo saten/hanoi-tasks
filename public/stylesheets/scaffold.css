@@ -1,6 +1,16 @@
-#links {width:100%;position:fixed;top:0px; height:45px;display:block;text-align:center;}
+#links {width:100%;position:fixed;top:0px; height:70px;display:block;text-align:center; z-index:2}
 #links ul {list-style:none;}
 #links li {display:inline;}
 
 /* index */
-#status {min-height:550px;width:100%; border:dashed 1px; position:relative;margin-top:50px;overflow:hidden; }
+#status {min-height:520px;width:98%; border:solid 1px; position:relative;margin-top:70px;overflow:hidden;padding:1%; z-index:1}
+.task_group {width:200px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
+#availables {width:200px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
+
+.tasks {width:98%; display:inline-block;margin:2px;}
+.task {width:98%; border:solid 1px;display:inline-block;margin:2px;}
+.task_players {width:98%; display:inline-block;margin:2px;min-height:20px;}
+.player_name { display:inline-block;margin:2px; font-weight:bolder;}
+
+.availables_title,.task_group_name {font-weight:bolder;font-variant:small-caps}
+#availables {background-color:#ccc}

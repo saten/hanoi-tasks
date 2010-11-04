@@ -16,12 +16,16 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :points %><br />
+    <%= f.text_field :points %>
+  </div>
+  <div class="field">
     <%= f.label :completed %><br />
     <%= f.check_box :completed %>
   </div>
   <div class="field">
     <%= f.label :task_group_id %><br />
-    <%= f.text_field :task_group_id %>
+    <%= f.select :task_group_id, options_from_collection_for_select(TaskGroup.all,:id,:name) %>
   </div>
   <div class="actions">
     <%= f.submit %>
