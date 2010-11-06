@@ -4,8 +4,8 @@
 
 /* index */
 #status {min-height:520px;width:94%; border:solid 1px; position:absolute;margin:70px 1%;;overflow:hidden;padding:1%; z-index:1}
-.task_group {width:200px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
-#availables {width:200px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
+.task_group {max-width:400px; min-width:200px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
+#availables {max-width:400px; min-width:200px;border:solid 1px;display:inline-block;text-align:center;margin:2px;}
 #completed_tasks {width:200px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
 .tasks {width:98%; display:inline-block;margin:2px;}
 .task {width:98%; border:solid 1px;display:inline-block;margin:1px;}

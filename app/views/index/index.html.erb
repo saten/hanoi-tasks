@@ -5,7 +5,7 @@
   
   <% TaskGroup.all.each do |tg| %>
     <div alt="<%=tg.id%>" class="task_group">
-      <span  class="task_group_name"><%= link_to h(tg.name),tg%></span>
+      <span  class="task_group_name"><%= h(tg.name)%></span>
       <div class="tasks">
         <% tg.tasks.all(:conditions=>["completed=?",false]).each do |t|%>
           <div class="task">
