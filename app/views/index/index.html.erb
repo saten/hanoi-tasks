@@ -4,15 +4,15 @@
 <div id="status">
   
   <% TaskGroup.all.each do |tg| %>
-    <div class="task_group">
-      <span class="task_group_name"><%= link_to h(tg.name),tg%></span>
+    <div alt="<%=tg.id%>" class="task_group">
+      <span  class="task_group_name"><%= link_to h(tg.name),tg%></span>
       <div class="tasks">
         <% tg.tasks.each do |t|%>
           <div class="task">
             <span class="task_name"><%=link_to h(t.name), t %></span>
-            <div class="task_players">
+            <div alt="<%=t.id%>" class="task_players">
               <% t.players.each do |p|%>
-                <span class="player_name"><%= link_to h(p.nickname), p%></span>
+                <span id="<%=p.id%>" class="player_name"><%=  h(p.nickname)%></span>
               <% end %>
             </div>
           </div>  
@@ -24,9 +24,15 @@
     <span class="availables_title"><%=t(:availables)%></span>
     <div class="task_players">
       <% Player.find_all_by_available(true).each do |p| %>
-        <span class="player_name"><%= link_to h(p.nickname), p%></span>
+        <span id="<%=p.id%>" class="player_name"><%= h(p.nickname)%></span>
       <% end %>
     </div>
   </div>
+  <div id="form">
+    <%=form_for @players_task do |f|%>
+    <%= f.text_field :player_id %>
+    <%= f.text_field :task_id %>
+    <%= text_field_tag :old_task_id%>
+    <%end%>
+  </div>
 </div>
-

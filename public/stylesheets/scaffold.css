@@ -14,3 +14,5 @@
 
 .availables_title,.task_group_name {font-weight:bolder;font-variant:small-caps}
 #availables {background-color:#ccc}
+
+#form {display:none}

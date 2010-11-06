@@ -44,6 +44,13 @@ class PlayersTasksController < ApplicationController
 
     respond_to do |format|
       if @players_task.save
+        @players_task.player.players_tasks.each do |pt |
+          pt.delete if  pt.id != @players_task.id
+        end
+        if @players_task.player.tasks.empty?
+          @players_task.player.available=true
+          @players_task.player.save
+        end
         format.html { redirect_to(@players_task, :notice => 'Players task was successfully created.') }
         format.xml  { render :xml => @players_task, :status => :created, :location => @players_task }
       else
