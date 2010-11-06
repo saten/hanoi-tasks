@@ -3,6 +3,7 @@ var old_task;
 var new_task;
 $(function(){
 	$("#status").addClass("ui-corner-all");
+	$(".player_name").button();
 	$(".player_name").effect("pulsate",250);
 	$(".task").addClass("ui-corner-all");
 	$(".task_group").addClass("ui-corner-all");
@@ -19,7 +20,6 @@ $(function(){
 			  $("#players_task_player_id").val(player);
 		    $("#players_task_task_id").val(new_task);
         $("#old_task_id").val(old_task);
-        dom_item=event.item;
           //create player_task
   		    $.ajax({
   		      type:"POST",
@@ -27,8 +27,7 @@ $(function(){
   		      url:"/players_tasks.xml",
   		      timeout:4000,
   		      success: function(data){
-  		        
-  		       $("#"+$("#players_task_player_id").val()).effect("pulsate",400);
+  		       $("#"+$("#players_task_player_id").val()).effect("pulsate",200);
   		      },
   		      error: function(xhr){
   		       $dom_item.effect("puff",300);
@@ -38,7 +37,14 @@ $(function(){
 			 },
 			placeholder:"ui-state-highlight",
 			forcePlaceholderSize:true,
-			opacity:0.7
+			opacity:0.2
 		});
-
+  $(".tasks").sortable({
+    connectWith: ".tasks",
+    stop: function(event,ui){
+      if (ui.item.parent("div.completed_tasks")){
+        ui.item.children("div.task_players").effect("puff",500);
+      }
+    }
+  });
 });

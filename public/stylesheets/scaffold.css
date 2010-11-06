@@ -1,18 +1,20 @@
-#links {width:100%;position:fixed;top:0px; height:70px;display:block;text-align:center; z-index:2}
+#links {width:98%;position:absolute;top:0px; height:70px;display:block;text-align:center; z-index:2}
 #links ul {list-style:none;}
 #links li {display:inline;}
 
 /* index */
-#status {min-height:520px;width:98%; border:solid 1px; position:relative;margin-top:70px;overflow:hidden;padding:1%; z-index:1}
+#status {min-height:520px;width:94%; border:solid 1px; position:absolute;margin:70px 1%;;overflow:hidden;padding:1%; z-index:1}
 .task_group {width:200px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
 #availables {width:200px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
-
+#completed_tasks {width:200px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
 .tasks {width:98%; display:inline-block;margin:2px;}
-.task {width:98%; border:solid 1px;display:inline-block;margin:2px;}
+.task {width:98%; border:solid 1px;display:inline-block;margin:1px;}
 .task_players {width:98%; display:inline-block;margin:2px;min-height:20px;}
 .player_name { display:inline-block;margin:2px; font-weight:bolder;}
 
+.task_name { font-weight:bolder;}
 .availables_title,.task_group_name {font-weight:bolder;font-variant:small-caps}
-#availables {background-color:#ccc}
+#availables {background-color:#ccc; position:absolute;top:0px;right:0px;}
+#completed_tasks {background-color:#ddd; position:absolute;bottom:0px;right:0px;}
 
 #form {display:none}

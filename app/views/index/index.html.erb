@@ -7,9 +7,9 @@
     <div alt="<%=tg.id%>" class="task_group">
       <span  class="task_group_name"><%= link_to h(tg.name),tg%></span>
       <div class="tasks">
-        <% tg.tasks.each do |t|%>
+        <% tg.tasks.all(:conditions=>["completed=?",false]).each do |t|%>
           <div class="task">
-            <span class="task_name"><%=link_to h(t.name), t %></span>
+            <span class="task_name"><%=h(t.name) %></span>
             <div alt="<%=t.id%>" class="task_players">
               <% t.players.each do |p|%>
                 <span id="<%=p.id%>" class="player_name"><%=  h(p.nickname)%></span>
@@ -25,6 +25,14 @@
     <div class="task_players">
       <% Player.find_all_by_available(true).each do |p| %>
         <span id="<%=p.id%>" class="player_name"><%= h(p.nickname)%></span>
+      <% end %>
+    </div>
+  </div>
+  <div id="completed_tasks">
+    <span class="availables_title"><%=t(:completed_tasks)%></span>
+    <div class="tasks">
+      <% Task.all(:conditions=>["completed=?",true]).each do |t| %>
+        <span alt="<%=t.id%>" class="task_name"><%= h("#{t.task_group.name} #{t.name}")%></span>
       <% end %>
     </div>
   </div>
