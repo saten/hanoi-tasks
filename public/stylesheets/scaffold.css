@@ -21,7 +21,9 @@
 #completed_tasks span {display:inline-block}
 
 #form {display:none}
-#progressbar {position:absolute;bottom:0px;left:0px;width:75%;min-height:2 0px;border:1px solid;margin:2px}
+#progressbar-container {position:absolute;bottom:0px;left:0px;max-width:75%;min-width:60%;min-height:20px;margin:2px;}
+#progressbar-container span {font-weight:bolder;font-variant:small-caps}
+#progressbar {width:100%;width:100%;min-height:20px;display:block}
 .ui-placeholder {background-color:yellow;width:98%;height:100%;display:inline-block;text-align:center;border:1px solid}
 .ui-button-text {font-size:11px;}
 .ui-progressbar-value { background-image: url(images/pbar-ani.gif); }

@@ -6,6 +6,7 @@ it:
   players_tasks: Attività Giocatore
   availables: Liberi
   completed_tasks: Attività Chiuse
+  progress: Progresso
 en:
   tasks: Tasks
   players: Players
@@ -14,3 +15,4 @@ en:
   players_tasks: Player's Tasks
   availables: Availables
   completed_tasks: Closed Activities
+  progress: Progress
