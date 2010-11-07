@@ -1,16 +1,20 @@
 var player;
 var old_task;
 var new_task;
+var completed_task;
 $(function(){
 	$("#status").addClass("ui-corner-all");
+  $("#completed_tasks").addClass("ui-corner-all");
 	$(".player_name").button();
-	$(".player_name").effect("pulsate",250);
+	//$(".player_name").effect("pulsate",250);
 	$(".task").addClass("ui-corner-all");
 	$(".task_group").addClass("ui-corner-all");
 	$("#availables").addClass("ui-corner-all");
 	$( ".task_players" ).disableSelection();
+	$( "#progressbar" ).progressbar();
 	$(".task_players").sortable({
 			connectWith: ".task_players",
+			disableSelection: true,
 			start: function(event, ui) {
         player=ui.item.attr('id');
         old_task=ui.item.parent('div.task_players').attr('alt');
@@ -35,16 +39,33 @@ $(function(){
             }
   		    });
 			 },
-			placeholder:"ui-state-highlight",
+			placeholder:"ui-placeholder",
 			forcePlaceholderSize:true,
 			opacity:0.2
 		});
   $(".tasks").sortable({
     connectWith: ".tasks",
+    placeholder:"ui-placeholder",
+    forcePlaceholderSize:true,
+    opacity:0.2,
     stop: function(event,ui){
-      if (ui.item.parent("div.completed_tasks")){
-        ui.item.children("div.task_players").effect("puff",500);
+      if (ui.item.offsetParent("#completed_tasks").attr('id')=='completed_tasks'){
+    		completed_task=ui.item.attr("alt");
+    		$.ajax({
+    			type:"PUT",
+    			timeout:4000,
+    			url:"/tasks/"+completed_task+".xml",
+    			data:"task[completed]=true"
+    		});
       }
+      ui.item.effect("fade",300);
+      document.location=document.location;
+    }
+  });
+  $.ajax({
+    url: "/progress",
+    success: function(data){
+      $("#progressbar").progressbar("value",parseInt(data));
     }
   });
 });

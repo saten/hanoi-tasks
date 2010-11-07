@@ -3,6 +3,7 @@ HanoiTasks::Application.routes.draw do
   resources :players_tasks
 
   get "index/index"
+  match 'progress' => "index#progress"
 
   root :to => "index#index"
   resources :task_groups

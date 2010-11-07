@@ -2,45 +2,56 @@
   <%= javascript_include_tag "index" %>
 <% end %>
 <div id="status">
-  
-  <% TaskGroup.all.each do |tg| %>
-    <div alt="<%=tg.id%>" class="task_group">
-      <span  class="task_group_name"><%= h(tg.name)%></span>
-      <div class="tasks">
-        <% tg.tasks.all(:conditions=>["completed=?",false]).each do |t|%>
-          <div class="task">
-            <span class="task_name"><%=h(t.name) %></span>
-            <div alt="<%=t.id%>" class="task_players">
-              <% t.players.each do |p|%>
-                <span id="<%=p.id%>" class="player_name"><%=  h(p.nickname)%></span>
-              <% end %>
-            </div>
-          </div>  
+  <div id="left">
+    <% TaskGroup.all.each do |tg| %>
+      <div alt="tg-<%=tg.id%>" class="task_group">
+        <span  class="task_group_name"><%= h(tg.name)%></span>
+        <div class="tasks">
+          <% tg.tasks.all(:conditions=>["completed=?",false]).each do |t|%>
+            <div class="task" alt="<%=t.id%>" id="t-<%=t.id%>">
+              <span class="task_name"><%=h(t.name) %></span>
+              <div class="task_players" alt="<%=t.id%>">
+                <% t.players.each do |p|%>
+                  <span id="<%=p.id%>" class="player_name"><%=  h(p.nickname)%></span>
+                <% end %>
+              </div>
+            </div>  
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div id="right">
+    <div id="availables">
+      <span class="availables_title"><%=t(:availables)%></span>
+      <div class="task_players">
+        <% Player.find_all_by_available(true).each do |p| %>
+          <span id="<%=p.id%>" class="player_name"><%= h(p.nickname)%></span>
         <% end %>
       </div>
     </div>
-  <% end %>
-  <div id="availables">
-    <span class="availables_title"><%=t(:availables)%></span>
-    <div class="task_players">
-      <% Player.find_all_by_available(true).each do |p| %>
-        <span id="<%=p.id%>" class="player_name"><%= h(p.nickname)%></span>
-      <% end %>
+    <div id="completed_tasks">
+      <span class="availables_title"><%=t(:completed_tasks)%></span>
+      <div class="tasks">
+        <% TaskGroup.all.each do |tg| %>
+        <div>
+          <%="#{tg.name}"%> 
+          <%tg.tasks.all(:conditions=>["completed=?",true]).each do |t|%>
+            <span class="task_name"><%= h("#{t.name}")%></span>
+          <%end%>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div id="form">
+      <%=form_for @players_task do |f|%>
+      <%= f.text_field :player_id %>
+      <%= f.text_field :task_id %>
+      <%= text_field_tag :old_task_id%>
+      <%end%>
     </div>
   </div>
-  <div id="completed_tasks">
-    <span class="availables_title"><%=t(:completed_tasks)%></span>
-    <div class="tasks">
-      <% Task.all(:conditions=>["completed=?",true]).each do |t| %>
-        <span alt="<%=t.id%>" class="task_name"><%= h("#{t.task_group.name} #{t.name}")%></span>
-      <% end %>
-    </div>
-  </div>
-  <div id="form">
-    <%=form_for @players_task do |f|%>
-    <%= f.text_field :player_id %>
-    <%= f.text_field :task_id %>
-    <%= text_field_tag :old_task_id%>
-    <%end%>
+  <div id="progressbar">
+    
   </div>
 </div>

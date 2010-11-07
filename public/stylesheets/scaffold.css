@@ -1,13 +1,15 @@
-#links {width:98%;position:absolute;top:0px; height:70px;display:block;text-align:center; z-index:2}
+#links {width:98%;position:absolute;top:0px; height:50px;display:block;text-align:center; z-index:2}
 #links ul {list-style:none;}
 #links li {display:inline;}
 
 /* index */
-#status {min-height:520px;width:94%; border:solid 1px; position:absolute;margin:70px 1%;;overflow:hidden;padding:1%; z-index:1}
-.task_group {max-width:400px; min-width:200px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
+#status {min-height:520px;width:94%; border:solid 1px; position:absolute;margin:50px 1%;;overflow:hidden;padding:1%; z-index:1;cursor:default}
+#left {max-width:75%; min-width:60%}
+#right {min-width:25%;max-width:40%;min-height:100%;position:absolute;bottom:0px;right:0px;} 
+.task_group {max-width:200px; min-width:150px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
 #availables {max-width:400px; min-width:200px;border:solid 1px;display:inline-block;text-align:center;margin:2px;}
-#completed_tasks {width:200px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
-.tasks {width:98%; display:inline-block;margin:2px;}
+#completed_tasks {min-width:200px;max-width:500px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
+.tasks {width:98%; min-height:20px;display:inline-block;margin:2px;cursor:move}
 .task {width:98%; border:solid 1px;display:inline-block;margin:1px;}
 .task_players {width:98%; display:inline-block;margin:2px;min-height:20px;}
 .player_name { display:inline-block;margin:2px; font-weight:bolder;}
@@ -16,5 +18,10 @@
 .availables_title,.task_group_name {font-weight:bolder;font-variant:small-caps}
 #availables {background-color:#ccc; position:absolute;top:0px;right:0px;}
 #completed_tasks {background-color:#ddd; position:absolute;bottom:0px;right:0px;}
+#completed_tasks span {display:inline-block}
 
 #form {display:none}
+#progressbar {position:absolute;bottom:0px;left:0px;width:75%;min-height:2 0px;border:1px solid;margin:2px}
+.ui-placeholder {background-color:yellow;width:98%;height:100%;display:inline-block;text-align:center;border:1px solid}
+.ui-button-text {font-size:11px;}
+.ui-progressbar-value { background-image: url(images/pbar-ani.gif); }
