@@ -3,7 +3,7 @@
 <% end %>
 <div id="status">
   <div id="left">
-    <% TaskGroup.all.each do |tg| %>
+    <% TaskGroup.all(:order=>["name ASC"]).each do |tg| %>
       <div alt="tg-<%=tg.id%>" class="task_group">
         <span  class="task_group_name"><%= h(tg.name)%></span>
         <div class="tasks">
