@@ -3,6 +3,7 @@
 #links li {display:inline;}
 
 /* index */
+#logo {position:absolute;top:0px;right:0px; background-image:url(/images/toh.png);width:50px;height:50px;margin:1px}
 #status {min-height:520px;width:94%; border:solid 1px; position:absolute;margin:50px 1%;;overflow:hidden;padding:1%; z-index:1;cursor:default}
 #left {max-width:75%; min-width:60%}
 #right {min-width:25%;max-width:40%;min-height:100%;position:absolute;bottom:0px;right:0px;} 
