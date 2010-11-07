@@ -8,6 +8,7 @@ $(function(){
 	$(".player_name").button();
 	//$(".player_name").effect("pulsate",250);
 	$(".task").addClass("ui-corner-all");
+	
 	$(".task_group").addClass("ui-corner-all");
 	$("#availables").addClass("ui-corner-all");
 	$( ".task_players" ).disableSelection();
@@ -42,7 +43,7 @@ $(function(){
 			placeholder:"ui-placeholder",
 			forcePlaceholderSize:true,
 			opacity:0.2
-		});
+		}).disableSelection();;
   $(".tasks").sortable({
     connectWith: ".tasks",
     placeholder:"ui-placeholder",
@@ -61,11 +62,12 @@ $(function(){
       ui.item.effect("fade",300);
       document.location=document.location;
     }
-  });
+  }).disableSelection();;
   $.ajax({
     url: "/progress",
     success: function(data){
       $("#progressbar").progressbar("value",parseInt(data));
     }
   });
+  
 });
