@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  validates_uniqueness_of :name
   belongs_to :task_group
   has_many :players_tasks
   has_many :players, :through=>:players_tasks
