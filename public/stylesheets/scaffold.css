@@ -27,7 +27,6 @@
 #progressbar {width:100%;width:100%;min-height:20px;display:block}
 .ui-placeholder {width:98%;height:100%;display:inline-block;}
 .ui-button-text {font-size:11px;}
-.ui-progressbar-value { background-image: url(images/pbar-ani.gif); }
 .ui-effects-transfer { border: 2px dotted gray; }
 * {font-size:small;} 
 
