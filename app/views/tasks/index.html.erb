@@ -4,6 +4,7 @@
   <tr>
     <th>Name</th>
     <th>Completed</th>
+    <th>Points</th>
     <th>Task group</th>
     <th></th>
     <th></th>
@@ -14,6 +15,7 @@
   <tr>
     <td><%= task.name %></td>
     <td><%= task.completed %></td>
+    <td><%= task.points %></td>
     <td><%= task.task_group.name %></td>
     <td><%= link_to 'Show', task %></td>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
