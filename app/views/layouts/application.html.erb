@@ -3,6 +3,7 @@
   <head>
     <title>HanoiTasks</title>
     <%= stylesheet_link_tag "scaffold","hot-sneaks/jquery-ui-1.8.6.custom" %>
+    <%= stylesheet_link_tag "#{h(session[:theme])}/jquery-ui-1.8.6.custom"%>
     <%= javascript_include_tag 'jquery','jquery-ui','rails','application' %>
     <%= csrf_meta_tag %>
     <%= yield :head %>
@@ -10,6 +11,9 @@
   <body>
     <div id="language">
       <%=select_tag :lang, options_for_select([["Italiano","it"],["English","en"]],I18n.locale)%>
+    </div>
+    <div id="theme-select">
+      <%=select_tag :theme, options_for_select([["UI-Darkness","ui-darkness"],["Hot-Sneaks","hot-sneaks"]],h(session[:theme]))%>
     </div>
     <div id="links">
       <ul>

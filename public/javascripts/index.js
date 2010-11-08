@@ -79,4 +79,14 @@ $(function(){
       }
     });
   });
+  $("#theme").change(function(){
+    $.ajax({
+      url: "/",
+      data: "theme="+$("#theme").val(),
+      type:"POST",
+      complete: function(){
+        document.location=document.location;
+      }
+    });
+  });
 });
