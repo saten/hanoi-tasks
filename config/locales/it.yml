@@ -1,7 +1,7 @@
 it:
   tasks: Tasks
   players: Giocatori
-  task_groups: Gruppi
+  task_groups: Gruppi di Task
   index: Home
   players_tasks: Attività Giocatore
   availables: Liberi
