@@ -8,9 +8,11 @@ class ApplicationController < ActionController::Base
     I18n.locale=session[:lang]
   end
   def set_theme
-    if params[:theme] and ["ui-darkness","hot-sneaks"].include? params[:theme]
+    session[:theme]||=DEFAULT_THEME
+    if params[:theme] and (AVAILABLE_THEMES.collect { | t , n | n }).include? params[:theme]
       session[:theme]=params[:theme]
     end
     logger.debug session[:theme]
   end
+  
 end

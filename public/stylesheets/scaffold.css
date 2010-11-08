@@ -1,10 +1,10 @@
-#links {width:70%; margin:1% 15%;position:absolute;top:0px; height:50px;display:block;text-align:center; z-index:2}
+#links {width:70%; margin:1% 15%;position:absolute;top:0px; height:20px;display:block;text-align:center; z-index:2}
 #links ul {list-style:none;}
 #links li {display:inline;}
 #lang {z-index:3}
 /* index */
 #logo {position:absolute;top:0px;right:0px; background-image:url(/images/toh.png);width:50px;height:50px;margin:1px}
-#status {min-height:520px;width:94%; border:solid 1px; position:absolute;margin:50px 1%;;overflow:hidden;padding:1%; z-index:1;cursor:default}
+#status {min-height:520px;width:94%; border:solid 1px; position:absolute;margin:20px 1%;;overflow:hidden;padding:1%; z-index:1;cursor:default}
 #left {max-width:75%; min-width:60%}
 #right {min-width:25%;max-width:40%;min-height:100%;position:absolute;bottom:0px;right:0px;} 
 .task_group {max-width:200px; min-width:150px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}

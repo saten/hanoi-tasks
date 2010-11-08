@@ -1,4 +1,6 @@
 it:
+  language: Lingua
+  theme: Tema
   tasks: Tasks
   players: Giocatori
   task_groups: Gruppi di Task

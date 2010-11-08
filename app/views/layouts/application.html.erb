@@ -10,10 +10,10 @@
   </head>
   <body>
     <div id="language">
-      <%=select_tag :lang, options_for_select([["Italiano","it"],["English","en"]],I18n.locale)%>
+      <%=t(:language)%>: <%=select_tag :lang, options_for_select([["Italiano","it"],["English","en"]],I18n.locale)%>
     </div>
     <div id="theme-select">
-      <%=select_tag :theme, options_for_select([["Hot-Sneaks","hot-sneaks"],["UI-Darkness","ui-darkness"]],h(session[:theme]))%>
+      <%=t(:theme)%>: <%=select_tag :theme, options_for_select(AVAILABLE_THEMES,h(session[:theme]))%>
     </div>
     <div id="links">
       <ul>
