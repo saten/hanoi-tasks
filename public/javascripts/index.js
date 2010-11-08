@@ -69,5 +69,14 @@ $(function(){
       $("#progressbar").progressbar("value",parseInt(data));
     }
   });
-  
+  $("#lang").change(function(){
+    $.ajax({
+      url: "/",
+      data: "lang="+$("#lang").val(),
+      type:"POST",
+      complete: function(){
+        document.location=document.location;
+      }
+    });
+  });
 });

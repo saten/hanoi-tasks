@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>HanoiTasks</title>
-  <%= stylesheet_link_tag "scaffold","hot-sneaks/jquery-ui-1.8.6.custom" %>
-  <%= javascript_include_tag 'jquery','jquery-ui','rails','application' %>
-  <%= csrf_meta_tag %>
-  <%= yield :head %>
-</head>
-<body>
-<div id="links">
-  <ul>
-    <li>
-      <%= link_to t(:index), root_path%>
-    </li>
-    <li>
-      <%= link_to t(:tasks), tasks_path%>
-    </li>
-    <li>
-      <%= link_to t(:players), players_path%>
-    </li>
-    <li>
-      <%= link_to t(:players_tasks), players_tasks_path%>
-    </li>
-    <li>
-      <%= link_to t(:task_groups), task_groups_path%>
-    </li>
-  </ul>
-</div>
-<div id="logo"></div>
-<%= yield %>
-
-</body>
+  <head>
+    <title>HanoiTasks</title>
+    <%= stylesheet_link_tag "scaffold","hot-sneaks/jquery-ui-1.8.6.custom" %>
+    <%= javascript_include_tag 'jquery','jquery-ui','rails','application' %>
+    <%= csrf_meta_tag %>
+    <%= yield :head %>
+  </head>
+  <body>
+    <div id="language">
+      <%=select_tag :lang, options_for_select([["Italiano","it"],["English","en"]],I18n.locale)%>
+    </div>
+    <div id="links">
+      <ul>
+        <li>
+          <%= link_to t(:index), root_path%>
+        </li>
+        <li>
+          <%= link_to t(:tasks), tasks_path%>
+        </li>
+        <li>
+          <%= link_to t(:players), players_path%>
+        </li>
+        <li>
+          <%= link_to t(:players_tasks), players_tasks_path%>
+        </li>
+        <li>
+          <%= link_to t(:task_groups), task_groups_path%>
+        </li>
+      </ul>
+    
+    </div>
+    <div id="logo"></div>
+    <%= yield %>
+    
+  </body>
 </html>

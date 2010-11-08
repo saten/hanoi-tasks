@@ -7,12 +7,3 @@ it:
   availables: Liberi
   completed_tasks: Attività Chiuse
   progress: Progresso
-en:
-  tasks: Tasks
-  players: Players
-  task_groups: Groups
-  index: Index
-  players_tasks: Player's Tasks
-  availables: Availables
-  completed_tasks: Closed Activities
-  progress: Progress

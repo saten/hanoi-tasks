@@ -1,7 +1,7 @@
-#links {width:98%;position:absolute;top:0px; height:50px;display:block;text-align:center; z-index:2}
+#links {width:70%; margin:1% 15%;position:absolute;top:0px; height:50px;display:block;text-align:center; z-index:2}
 #links ul {list-style:none;}
 #links li {display:inline;}
-
+#lang {z-index:3}
 /* index */
 #logo {position:absolute;top:0px;right:0px; background-image:url(/images/toh.png);width:50px;height:50px;margin:1px}
 #status {min-height:520px;width:94%; border:solid 1px; position:absolute;margin:50px 1%;;overflow:hidden;padding:1%; z-index:1;cursor:default}

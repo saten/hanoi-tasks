@@ -2,4 +2,11 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  tasks: Tasks
+  players: Players
+  task_groups: Groups
+  index: Index
+  players_tasks: Player's Tasks
+  availables: Availables
+  completed_tasks: Closed Activities
+  progress: Progress
