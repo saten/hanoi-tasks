@@ -7,7 +7,7 @@
       <div alt="tg-<%=tg.id%>" class="task_group">
         <span  class="task_group_name"><%= h(tg.name)%></span>
         <div class="tasks">
-          <% tg.tasks.all(:conditions=>["completed=?",false]).each do |t|%>
+          <% tg.tasks.all(:order=>["name ASC"],:conditions=>["completed=?",false]).each do |t|%>
             <div class="task" alt="<%=t.id%>" id="t-<%=t.id%>">
               <span class="task_name"><%=h(t.name) %></span>
               <div class="task_players" alt="<%=t.id%>">

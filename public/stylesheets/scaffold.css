@@ -14,7 +14,7 @@
 .task {width:98%; border:solid 1px;display:inline-block;margin:1px;}
 .task_players {width:98%; display:inline-block;margin:2px;min-height:20px;}
 .player_name { display:inline-block;margin:2px; font-weight:bolder;}
-
+.task_group_name,.availables_title {font-size:large}
 .task_name { font-weight:bolder;}
 .availables_title,.task_group_name {font-weight:bolder;font-variant:small-caps}
 #availables {background-color:#ccc; position:absolute;top:0px;right:0px;}
@@ -25,6 +25,9 @@
 #progressbar-container {position:absolute;bottom:0px;left:0px;max-width:75%;min-width:60%;min-height:20px;margin:2px;}
 #progressbar-container span {font-weight:bolder;font-variant:small-caps}
 #progressbar {width:100%;width:100%;min-height:20px;display:block}
-.ui-placeholder {background-color:yellow;width:98%;height:100%;display:inline-block;text-align:center;border:1px solid}
+.ui-placeholder {width:98%;height:100%;display:inline-block;}
 .ui-button-text {font-size:11px;}
 .ui-progressbar-value { background-image: url(images/pbar-ani.gif); }
+.ui-effects-transfer { border: 2px dotted gray; }
+* {font-size:small;} 
+

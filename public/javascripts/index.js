@@ -7,9 +7,9 @@ $(function(){
   $("#completed_tasks").addClass("ui-corner-all");
 	$(".player_name").button();
 	//$(".player_name").effect("pulsate",250);
-	$(".task").addClass("ui-corner-all");
+	$(".task").addClass("ui-corner-all ui-widget-content");
 	
-	$(".task_group").addClass("ui-corner-all");
+	$(".task_group").addClass("ui-corner-all ui-state-default");
 	$("#availables").addClass("ui-corner-all");
 	$( ".task_players" ).disableSelection();
 	$( "#progressbar" ).progressbar();
@@ -35,18 +35,16 @@ $(function(){
   		       $("#"+$("#players_task_player_id").val()).effect("pulsate",200);
   		      },
   		      error: function(xhr){
-  		       $dom_item.effect("puff",300);
-  		        
             }
   		    });
 			 },
-			placeholder:"ui-placeholder",
+			placeholder: "ui-placeholder ui-state-hover",
 			forcePlaceholderSize:true,
 			opacity:0.2
 		}).disableSelection();;
   $(".tasks").sortable({
-    connectWith: ".tasks",
-    placeholder:"ui-placeholder",
+    connectWith: "div#completed_tasks div.tasks",
+    placeholder: "ui-state-hover ui-placeholder ",
     forcePlaceholderSize:true,
     opacity:0.2,
     stop: function(event,ui){
@@ -56,13 +54,15 @@ $(function(){
     			type:"PUT",
     			timeout:4000,
     			url:"/tasks/"+completed_task+".xml",
-    			data:"task[completed]=true"
+    			data:"task[completed]=true",
+    			complete: function(){
+    			  ui.item.find(".player_name").effect("transfer",{to: "#availables", className: "ui-effects-transfer" },"slow",function(){$(this).effect("explode","slow")});
+    			  document.location=document.location;
+    			}
     		});
       }
-      ui.item.effect("fade",300);
-      document.location=document.location;
     }
-  }).disableSelection();;
+  }).disableSelection();
   $.ajax({
     url: "/progress",
     success: function(data){

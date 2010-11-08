@@ -11,8 +11,8 @@
 
 <% @players_tasks.each do |players_task| %>
   <tr>
-    <td><%= players_task.player_id %></td>
-    <td><%= players_task.task_id %></td>
+    <td><%= players_task.player.nickname %></td>
+    <td><%= players_task.task.task_group.name %> <%= players_task.task.name %></td>
     <td><%= link_to 'Show', players_task %></td>
     <td><%= link_to 'Edit', edit_players_task_path(players_task) %></td>
     <td><%= link_to 'Destroy', players_task, :confirm => 'Are you sure?', :method => :delete %></td>
