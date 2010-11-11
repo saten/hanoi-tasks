@@ -23,7 +23,7 @@
   </div>
   <div id="right">
     <div id="availables">
-      <span class="availables_title"><%=t(:availables)%></span>
+      <div class="availables_title"><%=t(:availables)%></div>
       <div class="task_players">
         <% Player.find_all_by_available(true).each do |p| %>
           <span id="<%=p.id%>" class="player_name"><%= h(p.nickname)%></span>
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div id="completed_tasks">
-      <span class="availables_title"><%=t(:completed_tasks)%></span>
+      <div class="availables_title"><%=t(:completed_tasks)%></div>
       <div class="tasks">
         <% TaskGroup.all.each do |tg| %>
         <div>

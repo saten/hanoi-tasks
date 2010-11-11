@@ -4,20 +4,20 @@
 #lang {z-index:3}
 /* index */
 #logo {position:absolute;top:0px;right:0px; background-image:url(/images/toh.png);width:50px;height:50px;margin:1px}
-#status {min-height:520px;width:94%; border:solid 1px; position:absolute;margin:20px 1%;;overflow:hidden;padding:1%; z-index:1;cursor:default}
+#status {min-height:520px;width:94%; border:solid 1px #ccc; position:absolute;margin:20px 1%;;overflow:hidden;padding:1%; z-index:1;cursor:default;background:#eee;}
 #left {max-width:75%; min-width:60%}
 #right {min-width:25%;max-width:40%;min-height:100%;position:absolute;bottom:0px;right:0px;} 
-.task_group {max-width:200px; min-width:150px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
-#availables {max-width:400px; min-width:200px;border:solid 1px;display:inline-block;text-align:center;margin:2px;}
-#completed_tasks {min-width:200px;max-width:500px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
-.tasks {width:98%; min-height:20px;display:inline-block;margin:2px;cursor:move}
-.task {width:98%; border:solid 1px;display:block; margin:2px auto}
-.task_players {width:98%; display:inline-block;margin:2px;min-height:20px;}
+.task_group {max-width:200px; min-width:150px; border:solid 1px #ccc;display:inline-block;text-align:center;margin:2px;}
+#availables {max-width:400px; min-width:200px;border:solid 1px #ccc;display:inline-block;text-align:center;margin:2px;}
+#completed_tasks {min-width:200px;max-width:500px; border:solid 1px #ccc;display:inline-block;text-align:center;margin:2px;}
+.tasks {width:96%; min-height:20px;display:inline-block;margin:2px;cursor:move}
+.task {width:96%; border:solid 1px #ccc;display:block; margin:2px auto}
+.task_players {width:96%; display:inline-block;margin:2px;min-height:20px;}
 .player_name { display:inline-block;margin:2px; font-weight:bolder;}
 .task_group_name,.availables_title {font-size:large}
 .task_group_name {margin:2px 2px 0}
 .task_name { font-weight:bolder;}
-.availables_title,.task_group_name {font-weight:bolder;font-variant:small-caps}
+.availables_title,.task_group_name {font-weight:bolder;font-variant:small-caps; margin:2px 2px 0;}
 #availables {background-color:#ccc; position:absolute;top:0px;right:0px;}
 #completed_tasks {background-color:#ddd; position:absolute;bottom:0px;right:0px;}
 #completed_tasks span {display:inline-block}
@@ -28,6 +28,6 @@
 #progressbar {width:100%;width:100%;min-height:20px;display:block}
 .ui-placeholder {width:98%;height:100%;display:inline-block;}
 .ui-button-text {font-size:11px;}
-.ui-effects-transfer { border: 2px dotted gray; }
+.ui-effects-transfer { border: 1px solid #aaa; }
 * {font-size:small;} 
 

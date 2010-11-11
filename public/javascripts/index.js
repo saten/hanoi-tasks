@@ -4,14 +4,17 @@ var new_task;
 var completed_task;
 $(function(){
 	$("#status").addClass("ui-corner-all");
-	$("#completed_tasks").addClass("ui-corner-all");
+	$("#completed_tasks").addClass("ui-widget ui-corner-all");
 	$(".player_name").button();
 	//$(".player_name").effect("pulsate",250);
 	$(".task").addClass("ui-corner-all ui-widget-content");
-	
+	$(".tasks").addClass("ui-widget-content ui-corner-all");
+	$(".task_players").addClass("ui-widget-content ui-corner-all");
 	$(".task_group").addClass("ui-corner-all ui-state-default");
 	$(".task_group_name").addClass("ui-corner-all ui-widget-header");
-	$("#availables").addClass("ui-corner-all");
+	$("#availables").addClass("ui-widget ui-corner-all");
+	$(".availables_title").addClass("ui-widget-header  ui-corner-all");
+	$("#availables").addClass("ui-widget ui-corner-all");
 	$( ".task_players" ).disableSelection();
 	$( "#progressbar" ).progressbar();
 	$(".task_players").sortable({
