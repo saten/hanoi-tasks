@@ -11,10 +11,11 @@
 #availables {max-width:400px; min-width:200px;border:solid 1px;display:inline-block;text-align:center;margin:2px;}
 #completed_tasks {min-width:200px;max-width:500px; border:solid 1px;display:inline-block;text-align:center;margin:2px;}
 .tasks {width:98%; min-height:20px;display:inline-block;margin:2px;cursor:move}
-.task {width:98%; border:solid 1px;display:inline-block;margin:1px;}
+.task {width:98%; border:solid 1px;display:block; margin:2px auto}
 .task_players {width:98%; display:inline-block;margin:2px;min-height:20px;}
 .player_name { display:inline-block;margin:2px; font-weight:bolder;}
 .task_group_name,.availables_title {font-size:large}
+.task_group_name {margin:2px 2px 0}
 .task_name { font-weight:bolder;}
 .availables_title,.task_group_name {font-weight:bolder;font-variant:small-caps}
 #availables {background-color:#ccc; position:absolute;top:0px;right:0px;}
