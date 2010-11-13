@@ -21,7 +21,6 @@ $(function(){
   $("#task_group_id").change(function(){
     get_tasks(this);
   });
-  get_tasks("#task_group_id");
   
 });
 

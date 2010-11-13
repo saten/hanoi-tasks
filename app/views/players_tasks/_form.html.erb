@@ -20,11 +20,11 @@
   </div>
   <div class="field">
     <%= f.label :task_group_id %><br />
-    <%= select_tag :task_group_id,options_from_collection_for_select(TaskGroup.all,:id,:name)  %>
+    <%= select_tag :task_group_id,options_from_collection_for_select(TaskGroup.all,:id,:name,@players_task.task.task_group.id)  %>
   </div>
   <div class="field">
     <%= f.label :task_id %><br />
-    <%= f.select :task_id,options_from_collection_for_select(Task.all,:id,:name) %>
+    <%= f.select :task_id,options_from_collection_for_select(Task.all,:id,:name,@players_task.task_id ) %>
   </div>
   <div class="actions">
     <%= f.submit %>

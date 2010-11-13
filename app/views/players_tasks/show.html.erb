@@ -2,12 +2,12 @@
 
 <p>
   <b>Player:</b>
-  <%= @players_task.player_id %>
+  <%= @players_task.player.nickname %>
 </p>
 
 <p>
   <b>Task:</b>
-  <%= @players_task.task_id %>
+  <%= @players_task.task.task_group.name %> <%= @players_task.task.name %>
 </p>
 
 
