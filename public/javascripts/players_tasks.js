@@ -5,6 +5,7 @@ function get_tasks(elem){
   $.ajax({
     type: 'GET',
     url: '/tasks.js',
+    dataType: "html",
     data: "group_id="+$(elem).val(),
     timeout: 4000,
     success: function(data){
