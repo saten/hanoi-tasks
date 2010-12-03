@@ -12,7 +12,5 @@ class ApplicationController < ActionController::Base
     if params[:theme] and (AVAILABLE_THEMES.collect { | t , n | n }).include? params[:theme]
       session[:theme]=params[:theme]
     end
-    logger.debug session[:theme]
   end
-  
 end

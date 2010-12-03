@@ -45,11 +45,15 @@
         <li>
           <%= link_to t(:task_groups), task_groups_path%>
         </li>
+        <li>
+          <%= link_to t(:snort_log),"javascript:show_snort_log();"%>
+        </li>
       </ul>
     
     </div>
     <div id="logo"></div>
     <%= yield %>
-    
+    <div id="snort_log" style="display:none">
+    </div>
   </body>
 </html>

@@ -11,4 +11,9 @@ class IndexController < ApplicationController
     end
     render :text=>(completed_points.to_f/total_points.to_f)*100, :status=>:ok
   end
+  def snort
+    @snort_log=RestClient.get "http://192.168.135.130/base/base_qry_main.php?new=2&num_result_rows=-1&submit=Query+DB&current_view=-1&ip_addr_cnt=1&ip_addr[0][0]=+&ip_addr[0][1]=ip_src&ip_addr[0][2]=%3D&ip_addr[0][3]=192.168.135.1&ip_addr[0][8]=+&ip_addr[0][9]=+"
+    render :layout=>false
+  end  
+
 end

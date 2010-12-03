@@ -4,7 +4,7 @@ HanoiTasks::Application.routes.draw do
 
   get "index/index"
   match 'progress' => "index#progress"
-
+  match 'snort' => "index#snort"
   root :to => "index#index"
   resources :task_groups
 
