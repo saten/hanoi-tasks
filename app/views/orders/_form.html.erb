@@ -1,0 +1,32 @@
+<%= form_for(@order) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <h1>pagamento anticipato</h1>
+    <h1>ordine ENTRO LE 19:30 poi coda FIFO per mangiare</h1>
+  </div>
+  <div class="field">
+    <%= f.label :pizza_name %><br />
+    <%= f.select :pizza_name, options_for_select(pizza_options,@order.pizza_name) %>
+  </div>
+  <div class="field">
+    <%= f.label :beverage_name %>- GRATIS<br />
+    <%= f.select :beverage_name,options_for_select(beverage_options,@order.beverage_name) %>
+  </div>
+  <div class="field">
+    <%= f.label :player_id %><br />
+    <%= f.select :player_id, options_from_collection_for_select(Player.all,:id,:nickname) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

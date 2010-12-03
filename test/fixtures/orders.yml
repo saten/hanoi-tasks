@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  pizza_name: MyString
+  beverage_name: MyString
+  player_id: 1
+
+two:
+  pizza_name: MyString
+  beverage_name: MyString
+  player_id: 1
