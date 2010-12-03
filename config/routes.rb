@@ -1,5 +1,7 @@
 HanoiTasks::Application.routes.draw do
   
+  resources :orders
+
   resources :players_tasks
 
   get "index/index"
@@ -10,7 +12,9 @@ HanoiTasks::Application.routes.draw do
 
   resources :tasks
 
-  resources :players
+  resources :players do
+    resource :order
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

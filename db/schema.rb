@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101107122200) do
+ActiveRecord::Schema.define(:version => 20101203144138) do
+
+  create_table "orders", :force => true do |t|
+    t.string   "pizza_name"
+    t.string   "beverage_name"
+    t.integer  "player_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "players", :force => true do |t|
     t.string   "nickname"
