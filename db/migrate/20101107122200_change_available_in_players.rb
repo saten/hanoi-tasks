@@ -1,6 +1,6 @@
 class ChangeAvailableInPlayers < ActiveRecord::Migration
   def self.up
-    change_column :players, :available, :boolean, :default=>true 
+    change_column :players, :available, :boolean, :default=>true
   end
 
   def self.down

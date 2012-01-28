@@ -17,7 +17,7 @@ function show_snort_log(){
       $("#snort_log").dialog({
         width:800
       });
-      
+
     }
   })
 }
