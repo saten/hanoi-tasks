@@ -13,7 +13,7 @@ function get_tasks(elem){
       $("#players_task_task_id").html(data);
     },
     error: function(xhr){}
-  });  
+  });
 }
 $(function(){
   $("#task_group_id").click(function(){
@@ -22,6 +22,6 @@ $(function(){
   $("#task_group_id").change(function(){
     get_tasks(this);
   });
-  
+
 });
 

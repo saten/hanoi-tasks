@@ -15,7 +15,7 @@
                   <span id="<%=p.id%>" class="player_name"><%=  h(p.nickname)%></span>
                 <% end %>
               </div>
-            </div>  
+            </div>
           <% end %>
         </div>
       </div>
@@ -35,7 +35,7 @@
       <div class="tasks">
         <% TaskGroup.all.each do |tg| %>
         <div>
-          <%="#{tg.name}"%> 
+          <%="#{tg.name}"%>
           <%tg.tasks.all(:conditions=>["completed=?",true]).each do |t|%>
             <span class="task_name"><%= h("#{t.name}")%></span>
           <%end%>

@@ -1,5 +1,5 @@
 HanoiTasks::Application.routes.draw do
-  
+
   resources :orders
 
   resources :players_tasks
