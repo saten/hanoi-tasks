@@ -32,8 +32,6 @@ GEM
     builder (2.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    exceptional (2.0.32)
-      rack
     hpricot (0.8.4)
     i18n (0.5.0)
     jquery-rails (1.0.11)
@@ -47,7 +45,7 @@ GEM
     mime-types (1.16)
     mysql (2.8.1)
     polyglot (0.3.1)
-    rack (1.2.3)
+    rack (1.2.8)
     rack-mount (0.6.14)
       rack (>= 1.0.0)
     rack-test (0.5.7)
@@ -80,7 +78,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  exceptional
   hpricot
   jquery-rails
   mysql
