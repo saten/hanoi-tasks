@@ -32,8 +32,6 @@ GEM
     builder (2.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    exceptional (2.0.32)
-      rack
     hpricot (0.8.4)
     i18n (0.5.0)
     jquery-rails (1.0.11)
@@ -74,13 +72,12 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.28)
+    tzinfo (0.3.61)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  exceptional
   hpricot
   jquery-rails
   mysql
